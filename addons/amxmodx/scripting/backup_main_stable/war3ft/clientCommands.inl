@@ -219,12 +219,6 @@ public cmd_Ultimate(id)
 		{
 			SH_Ult_BigBadVoodoo( id );
 		}
-		
-		// NIGHT STALKER - Dark Ascension 
-		case ULTIMATE_ASCENSION:
-		{
-			NS_Ult_DarkAscension( id );
-		}
 
 		// WARDEN - Vengeance
 		case ULTIMATE_VENGEANCE:
@@ -530,7 +524,7 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_GLOVES );
 		}
 
-		else if ( CMD_Equal( id,  szCmd, "rings" )  || CMD_Equal( id, szCmd, "regen" ) || CMD_Equal( id, szCmd, "ring" ) )
+		else if ( CMD_Equal( id,  szCmd, "rings" )  || CMD_Equal( id, szCmd, "regen" ) )
 		{
 			if ( ITEM_MenuCanBuyCheck( id ) ) ITEM_BuyRings( id );
 		}
@@ -538,11 +532,6 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 		else if ( CMD_Equal( id, szCmd, "chameleon" ) || CMD_Equal( id, szCmd, "skin" ) )
 		{
 			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_CHAMELEON );
-		}
-		
-		else if ( CMD_Equal( id, szCmd, "gem" ) || CMD_Equal( id, szCmd, "guard" ) || CMD_Equal( id, szCmd, "protectant" )  )
-		{
-			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_PROTECTANT );
 		}
 
 		else if ( CMD_Equal( id, szCmd, "mole" ) )

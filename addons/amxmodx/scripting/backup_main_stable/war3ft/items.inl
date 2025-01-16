@@ -14,7 +14,7 @@ ITEM_Init()
 	ITEM_COST[ITEM_FROST]	    = 2000;			// Orb of Frost
 	ITEM_COST[ITEM_HEALTH]	    = 1000;			// Periapt of Health
 	ITEM_COST[ITEM_TOME]	    = 4000;			// Tome of Experience
-	ITEM_COST[ITEM_SCROLL]	    = 3000;			// Scroll of Respawning
+	ITEM_COST[ITEM_SCROLL]	    = 6000;			// Scroll of Respawning
 	ITEM_COST[ITEM_PROTECTANT]	= 1500;			// Mole Protectant
 	ITEM_COST[ITEM_HELM]	    = 3000;			// Helm of Excellence
 	ITEM_COST[ITEM_AMULET]	    = 1500;			// Amulet of the Cat
@@ -22,7 +22,7 @@ ITEM_Init()
 	ITEM_COST[ITEM_GLOVES]	    = 1700;			// Flaming Gloves of Warmth
 	ITEM_COST[ITEM_RING]	    = 500;			// Ring of Regeneration + 1
 	ITEM_COST[ITEM_CHAMELEON]	= 4500;			// Chameleon
-	ITEM_COST[ITEM_MOLE]	    = 9000;			// Mole
+	ITEM_COST[ITEM_MOLE]	    = 16000;		// Mole
 
 	// Item costs are a little different for DOD
 	if ( g_MOD == GAME_DOD )
@@ -468,7 +468,6 @@ ITEM_GiveBonuses( id, iItem )
 			{
 				_ITEM_Ring( id );
 			}
-			ITEM_BuyRings( id ); 
 		}
 
 		case ITEM_CHAMELEON:

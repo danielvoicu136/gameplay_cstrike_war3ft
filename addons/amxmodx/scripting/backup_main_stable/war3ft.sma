@@ -58,7 +58,6 @@ new const WC3DATE[]		=	__DATE__;
 #include <dbi>
 #include <sqlx>
 #include <hamsandwich>
-#include <Vexd_Utilities>
 
 // Header files that contain function declarations and variables
 #include "war3ft/constants.inl"
@@ -85,8 +84,7 @@ new const WC3DATE[]		=	__DATE__;
 #include "war3ft/race_shadow.inl"			// Shadow Hunter	- 6
 #include "war3ft/race_warden.inl"           // Warden           - 7
 #include "war3ft/race_crypt.inl"			// Crypt Lord       - 8
-#include "war3ft/race_stalker.inl"			// Night Stalker	- 9
-#include "war3ft/race_chameleon.inl"		// Chameleon		- 10
+#include "war3ft/race_chameleon.inl"		// Chameleon		- 9
 
 #include "war3ft/forwards.inl"
 #include "war3ft/effects.inl"

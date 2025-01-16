@@ -122,7 +122,6 @@ public WC3_Precache()
 	copy( g_szRaceSprites[RACE_SHADOW]		, 63, "sprites/warcraft3/races/wc3_shadow_01.spr"	);
 	copy( g_szRaceSprites[RACE_WARDEN]		, 63, "sprites/warcraft3/races/wc3_warden_01.spr"	);
 	copy( g_szRaceSprites[RACE_CRYPT]		, 63, "sprites/warcraft3/races/wc3_cryptlord_01.spr"	);
-	copy( g_szRaceSprites[RACE_STALKER]		, 63, "sprites/warcraft3/races/wc3_nightstalker_01.spr"	);
 	copy( g_szRaceSprites[RACE_CHAMELEON]	, 63, "sprites/warcraft3/races/wc3_chameleon_01.spr"	);
 
 	// Store level sprite names

@@ -24,7 +24,6 @@
 #define	TASK_ITEM_GLOVES	544		// Nade timer (gloves)
 #define	TASK_UNHOLYSPEED	576		// Unholyspeed timer
 #define	TASK_RESETGOD		608		// Reset god mode
-#define	TASK_RESETCLIP		632		// Reset clip mode
 #define	TASK_BLINKCHECK		640		// Check to see if the player teleported into an invalid location
 #define	TASK_BLINKSTUCK		672		// Checks to see if a user is stuck after blinking
 #define	TASK_BIGBADATTACKER	704		// _SH_ResetBigBadAttacker
@@ -194,8 +193,7 @@
 #define RACE_SHADOW				6
 #define RACE_WARDEN				7
 #define RACE_CRYPT				8
-#define RACE_STALKER			9
-#define RACE_CHAMELEON			10
+#define RACE_CHAMELEON			9
 
 // team ids 
 #define UNASSIGNED 0 
@@ -237,7 +235,7 @@
 //#define DISPLAYLEVEL_SHOWBOTH		3
 #define	DISPLAYLEVEL_SHOWRACECHAT	4
 
-#define MAX_RACES					10
+#define MAX_RACES					9
 
 #define MAX_LEVELS					10
 
@@ -544,16 +542,7 @@ new bool:g_bGlovesDisabled = false;
 #define ULTIMATE_LOCUSTSWARM	34
 #define PASS_ORB				35
 
-#define SKILL_VOID				36
-#define SKILL_FEAR				37 
-#define SKILL_HUNTER			38 
-#define ULTIMATE_ASCENSION		39
-#define PASS_HEARTH				40
-
-// SKILLS + 1 
-#define MAX_SKILLS				41
-
-
+#define MAX_SKILLS				36
 #define MAX_RACE_SKILLS         3
 #define MAX_SKILL_LEVEL			3
 #define MAX_ULTIMATE_LEVEL		1
@@ -731,6 +720,3 @@ new bool:g_bCZBotRegisterHam
 
 // Game Menu 
 new bool:ChooseTeamOverrideActive[33];
-
-// Used by Dark Ascension 
-new g_lastPosition[33][3]

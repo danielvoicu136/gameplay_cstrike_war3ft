@@ -44,12 +44,6 @@ SM_Init()
 	g_SkillOwner[SKILL_CARRIONBEETLES		]	= RACE_CRYPT;
 	g_SkillOwner[ULTIMATE_LOCUSTSWARM		]	= RACE_CRYPT;
 	g_SkillOwner[PASS_ORB					]	= RACE_CRYPT;
-	
-	g_SkillOwner[SKILL_VOID					]	= RACE_STALKER;
-	g_SkillOwner[SKILL_FEAR					]	= RACE_STALKER;
-	g_SkillOwner[SKILL_HUNTER				]	= RACE_STALKER;
-	g_SkillOwner[ULTIMATE_ASCENSION			]	= RACE_STALKER;
-	g_SkillOwner[PASS_HEARTH				]	= RACE_STALKER;
 
 
 	// Set up the skill types
@@ -96,12 +90,6 @@ SM_Init()
 	g_SkillType[SKILL_CARRIONBEETLES		]	= SKILL_TYPE_TRAINABLE;
 	g_SkillType[ULTIMATE_LOCUSTSWARM		]	= SKILL_TYPE_ULTIMATE;
 	g_SkillType[PASS_ORB					]	= SKILL_TYPE_PASSIVE;
-	
-	g_SkillType[SKILL_VOID					]	= SKILL_TYPE_TRAINABLE;
-	g_SkillType[SKILL_FEAR					]	= SKILL_TYPE_TRAINABLE;
-	g_SkillType[SKILL_HUNTER				]	= SKILL_TYPE_TRAINABLE;
-	g_SkillType[ULTIMATE_ASCENSION			]	= SKILL_TYPE_ULTIMATE;
-	g_SkillType[PASS_HEARTH					]	= SKILL_TYPE_PASSIVE;
 
 
 	// Set up the skill order
@@ -148,13 +136,6 @@ SM_Init()
 	g_SkillOrder[SKILL_CARRIONBEETLES		]	= SKILL_POS_3;
 	g_SkillOrder[ULTIMATE_LOCUSTSWARM		]	= SKILL_POS_4;
 	g_SkillOrder[PASS_ORB					]	= SKILL_POS_NONE;
-	
-	g_SkillOrder[SKILL_VOID					]	= SKILL_POS_1;
-	g_SkillOrder[SKILL_FEAR					]	= SKILL_POS_2;
-	g_SkillOrder[SKILL_HUNTER				]	= SKILL_POS_3;
-	g_SkillOrder[ULTIMATE_ASCENSION			]	= SKILL_POS_4;
-	g_SkillOrder[PASS_HEARTH				]	= SKILL_POS_NONE;
-	
 }
 
 /***** NEW SKILL SET UP BELOW!! *****/

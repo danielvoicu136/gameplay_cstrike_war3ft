@@ -167,7 +167,6 @@ ULT_Icon( id, flag )
 			case 6: r=0,	g=200,	b=200;		// Shadow Hunter
 			case 7: r=255,	g=0,	b=0;		// Warden
 			case 8: r=0,	g=255,	b=0;		// Crypt Lord
-			case 9: r=150,	g=0,	b=210;		// Night Stalker 
 		}
 			
 		// Special circumstances should be done here
@@ -346,15 +345,6 @@ ULT_Reset( id )
 
 		SH_Ult_Remove( id );
 	}
-	
-		// Reset Dark Ascension 
-	if ( task_exists( TASK_RESETCLIP + id ) )
-	{
-		remove_task( TASK_RESETCLIP + id );
-
-		NS_Ult_Remove( id );
-	}
-	
 	
 	// Set this to false to stop searching ultimates (used by NE + ORC + BM ultimates)
 	p_data_b[id][PB_ISSEARCHING] = false;
