@@ -8,7 +8,7 @@ RACE_5 = Blood Mage
 RACE_6 = Shadow Shaman
 RACE_7 = Warden
 RACE_8 = Crypt Lord
-RACE_9 = Night Stalker
+RACE_9 = Death Reaper
 RACE_10 = Chameleon
 
 RACE_S_0 = No Race
@@ -20,7 +20,7 @@ RACE_S_5 = Blood Mage
 RACE_S_6 = Shaman
 RACE_S_7 = Warden
 RACE_S_8 = Crypt Lord
-RACE_S_9 = Night Stalker 
+RACE_S_9 = Death Reaper 
 RACE_S_10 = Chameleon
 
 SKILL_0 = Vampiric LifeSteal 
@@ -59,11 +59,11 @@ SKILL_32 = Spiked Carapace
 SKILL_33 = Carrion Beetles
 SKILL_34 = Locust Swarm
 SKILL_35 = Orb of Annihilation
-SKILL_36 = Void Midnight 
-SKILL_37 = Crippling Fear
-SKILL_38 = Hunter in the Night
+SKILL_36 = Spiritual Armor      
+SKILL_37 = Fear and Decay 
+SKILL_38 = Super Flash     
 SKILL_39 = Dark Ascension
-SKILL_40 = Heart of Darkness 
+SKILL_40 = Soul Collector    
 
 SKILL_I_0 = You gain life back from each successful shot at an enemy
 SKILL_I_1 = Gives you a speed boost
@@ -101,11 +101,11 @@ SKILL_I_32 = Does mirror damage to the person who shot you and you gain armor
 SKILL_I_33 = You have a chance of your beetles attacking the enemy when on target
 SKILL_I_34 = A Swarm of green locusts attacks the enemy
 SKILL_I_35 = You have a chance of doing additional damage per attack
-SKILL_I_36 = Bring the darkness to the enemies, making them vulnerable 
-SKILL_I_37 = You have a chance of doing damage to your victim and his nearby teammates
-SKILL_I_38 = You will be healed after each successfully killed enemy 
-SKILL_I_39 = Summons instant darkness and gains flight and unobstructed movement
-SKILL_I_40 = During the darkness, health regeneration and silent movement are active
+SKILL_I_36 = You have a chance to convert armor into health when attacked 
+SKILL_I_37 = You have a chance of doing extra damage to your victim and his nearby teammates
+SKILL_I_38 = Flash grenades gain the ability to knock back targets  
+SKILL_I_39 = Instant flight and unobstructed movement
+SKILL_I_40 = You will restore yourself after each kill
 
 SKILL_10_DOD = Reincarnation
 

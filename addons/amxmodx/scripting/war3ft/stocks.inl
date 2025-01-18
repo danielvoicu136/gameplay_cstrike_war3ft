@@ -101,3 +101,4 @@ stock CreateFog ( const index = 0, const red = 127, const green = 127, const blu
         message_end();
     }
 } 
+

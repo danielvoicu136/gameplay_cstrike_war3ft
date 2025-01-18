@@ -618,6 +618,36 @@ new const Float:p_spiked[3] =			{0.05,0.1,0.15}			// Spiked Carapace			(skill 2)
 new const Float:p_carrion[3] =			{0.05,0.10,0.15}		// Carrion Beetle			(skill 3)
 new const Float:p_orb[11] =				{0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 0.15}	// Orb of Annihilation	(Skill 4)
 
+new const Float:p_void[3] =				{0.333,0.666,1.0}		// Void 					(skill 1)
+new const Float:p_fear[3] =				{0.10,0.20,0.30}		// Fear 					(skill 2)
+
+
+new const p_hearth[11] =				{10,13,16,19,22,25,28,31,34,37,40}			// Hearth	(skill 4)
+
+/* Super flash */ 
+
+new const Float:p_hunter_power[3] =				{100.0,150.0,200.0}				// Hunter Power 					(skill 3)
+new const Float:p_hunter_radius[3] =			{600.0,800.0,1000.0}			// Hunter Radius 				(skill 3)
+
+new const InstantExplode = 0; 
+
+new gSpriteShockwave;
+new gMaxPlayers;
+new gExplodeModel;
+
+new const gFbExplodeSound[ ] = "x_shoot1.wav";
+new const gFbExplodeModel[ ] = "models/w_flashbang.mdl";
+
+
+#define IsPlayer(%1)		(1 <= %1 <= gMaxPlayers)
+#define write_coord_f(%0)	(engfunc( EngFunc_WriteCoord, %0 ))
+#define BREAK_TRANS		0x20
+
+const m_bLightSmoke = 114;
+const m_bIsC4 = 96;
+const m_XoGrenade = 5;
+
+
 
 new MOTD_header[] = "<html><head><LINK REL=^"StyleSheet^" HREF=^"wc3.css^" TYPE=^"text/css^"></head><body>";
 

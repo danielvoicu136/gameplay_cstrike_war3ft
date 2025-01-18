@@ -133,6 +133,18 @@ bool:SHARED_IsGrenade( iWeapon )
 	return false;
 }
 
+bool:SHARED_IsFlash( iWeapon )
+{
+	if ( g_MOD == GAME_CSTRIKE || g_MOD == GAME_CZERO )
+	{
+		if ( iWeapon == CSW_FLASHBANG  )
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 // Function checks to see if the weapon id is a primary weapon (used with Night Elf's Entangle)
 SHARED_IsPrimaryWeapon( iWeaponID )
 {
@@ -1393,6 +1405,11 @@ bool:SHARED_ValidPlayer( id )
 	}
 
 	return true;
+}
+
+bool:SHARED_ConnectedValidPlayer(id)
+{
+    return (id > 0 && id <= MAXPLAYERS && is_user_connected(id));
 }
 
 #define MAXGLOW					150

@@ -13,6 +13,12 @@
 public WC3_Precache()
 {
 	
+	gSpriteShockwave = precache_model( "sprites/shockwave.spr" );
+	gExplodeModel = precache_model( gFbExplodeModel );
+
+	precache_sound( gFbExplodeSound );
+	
+	
 	// Precache wc3.css (if it exists!)
 	if ( !file_exists( "wc3.css" ) )
 	{
@@ -1318,8 +1324,11 @@ public WC3_Death( iVictim, iKiller, iWeaponID, iHeadshot )
 		// Lets give a little extra money if CSDM is on...
 		if ( CVAR_csdm_active > 0 && get_pcvar_num( CVAR_csdm_active ) == 1 )
 		{
-			SHARED_SetUserMoney( iKiller, SHARED_GetUserMoney( iKiller ) + 300, 1 );
+			SHARED_SetUserMoney( iKiller, SHARED_GetUserMoney( iKiller ) + 500, 1 );
 		}
+		
+		NS_SkillsBounty( iKiller, iVictim );
+		
 	}
 
 	// Give the bot a chance to respawn
@@ -1709,6 +1718,10 @@ WC3_PostSpawn( id )
 
 		// If the user's ultimate is ready, lets show their icon!
 		ULT_IconHandler( id );
+		
+		// NS Skill Hunter 
+		set_task(1.4, "NS_SkillHunter", id);
+		
 	}
 
 	// Check for Day of Defeat

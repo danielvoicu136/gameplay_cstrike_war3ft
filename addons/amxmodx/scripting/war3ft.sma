@@ -59,6 +59,7 @@ new const WC3DATE[]		=	__DATE__;
 #include <sqlx>
 #include <hamsandwich>
 #include <Vexd_Utilities>
+#include <xs>
 
 // Header files that contain function declarations and variables
 #include "war3ft/constants.inl"
@@ -198,9 +199,13 @@ public plugin_init()
 	register_event( "HLTV"				, "EVENT_NewRound"	, "a"	, "1=0"	,			"2=0"	);
 
 	register_dictionary( "war3FT.txt");
+	
+	gMaxPlayers = get_maxplayers( );
 
 	RegisterHam( Ham_TakeDamage, "player", "EVENT_TakeDamage" );
 	RegisterHam( Ham_Spawn, "player", "EVENT_Spawn", 1);
+	RegisterHam( Ham_Think, "grenade", "bacon_Think" );
+	RegisterHam( Ham_Touch, "grenade", "bacon_Touch", 1 );
 
 	// Game Specific Initialization
 	if ( g_MOD == GAME_CSTRIKE || g_MOD == GAME_CZERO )

@@ -40,6 +40,25 @@ public grenade_throw( index, greindex, wId )
 			}
 		}
 	}
+	
+	static iSkillLevel2;
+	iSkillLevel2 = SM_GetSkillLevel( index, SKILL_HUNTER );
+
+	if ( greindex && iSkillLevel2 > 0 )
+	{
+	
+		if ( OR_CriticalGrenadeAllowed( index ) )
+		{
+
+			if ( SHARED_IsFlash( wId ) )
+			{
+				new iWidth = 3 * iSkillLevel2;
+
+				Create_TE_BEAMFOLLOW( greindex, g_iSprites[SPR_TRAIL], 20, iWidth, 150, 1, 210, 196 );
+			}
+		}
+	}
+	
 	return;
 }
 
@@ -78,6 +97,8 @@ public client_damage( iAttacker, iVictim, iDamage, iWeapon, iHitPlace, TA )
 	{
 		return;
 	}
+	
+	
 
 	// If they damage themself we don't care now do we ?
 	if ( iVictim == iAttacker )
@@ -106,6 +127,7 @@ public client_damage( iAttacker, iVictim, iDamage, iWeapon, iHitPlace, TA )
 		NE_SkillsOffensive( iAttacker, iVictim, iWeapon, iDamage, iHitPlace );
 		BM_SkillsOffensive( iAttacker, iVictim, iDamage );
 		SH_SkillsOffensive( iAttacker, iVictim );
+		NS_SkillsOffensive( iAttacker, iVictim );
 		WA_SkillsOffensive( iAttacker, iVictim, iHitPlace );
 		CL_SkillsOffensive( iAttacker, iVictim, iHitPlace );
 	}
@@ -118,6 +140,7 @@ public client_damage( iAttacker, iVictim, iDamage, iWeapon, iHitPlace, TA )
 		//OR_SkillsDefensive( iAttacker, iVictim, iWeapon, iDamage, iHitPlace );
 		NE_SkillsDefensive( iAttacker, iVictim, iDamage, iHitPlace );
 		BM_SkillsDefensive( iAttacker, iVictim, iDamage );
+		NS_SkillsDefensive( iAttacker, iVictim );
 		SH_SkillsDefensive( iAttacker, iVictim );
 		//WA_SkillsDefensive( iAttacker, iVictim, iWeapon, iDamage, iHitPlace );
 		CL_SkillsDefensive( iAttacker, iVictim, iDamage, iHitPlace );
@@ -136,7 +159,7 @@ public client_damage( iAttacker, iVictim, iDamage, iWeapon, iHitPlace, TA )
 public client_death( iAttacker, iVictim, iWeapon, hitplace, TK )
 {
 	// Counter-Strike and Condition Zero Checks
-	if ( g_MOD == GAME_CSTRIKE || g_MOD == GAME_CZERO )
+	if ( ( g_MOD == GAME_CSTRIKE || g_MOD == GAME_CZERO ) && ( SHARED_ConnectedValidPlayer( iAttacker ) && SHARED_ConnectedValidPlayer( iVictim ) ) )
 	{
 
 		// Check out who the inflictor was
@@ -178,14 +201,14 @@ public on_Death( iVictim, iAttacker, iWeaponID, iHeadshot )
 	}
 	
 	// Counter-Strike and Condition Zero Checks
-	if ( g_MOD == GAME_CSTRIKE || g_MOD == GAME_CZERO )
+	if ( ( g_MOD == GAME_CSTRIKE || g_MOD == GAME_CZERO ) && ( SHARED_ConnectedValidPlayer( iAttacker ) && SHARED_ConnectedValidPlayer( iVictim ) ) )
 	{
 		// For some reason the damage passed by explosions is not actually correct (perhaps armor adjustments weren't done yet), so lets check
 		if ( is_user_alive( iVictim ) && iWeaponID == CSW_C4 )
 		{
 			return;
 		}
-
+		
 		// Check for NightVision
 		p_data_b[iVictim][PB_NIGHTVISION]	= (cs_get_user_nvg( iVictim )) ? true : false;
 
@@ -685,3 +708,51 @@ public TRIGGER_TraceLine( Float:v1[3], Float:v2[3], noMonsters, pentToSkip )
 	
 	return FMRES_IGNORED;
 }
+
+
+public bacon_Think( iEnt )
+{
+	new Float:flGameTime = get_gametime( );
+	new iOwner;
+
+	new Float:flDmgTime;
+	pev( iEnt, pev_dmgtime, flDmgTime );
+
+	if( flDmgTime <= flGameTime
+	&& get_pdata_int( iEnt, m_bLightSmoke, m_XoGrenade ) == 0
+    	&& !( get_pdata_int( iEnt, m_bIsC4, m_XoGrenade ) & ( 1<<8 ) )
+	&& IsPlayer( ( iOwner = pev( iEnt, pev_owner ) ) ) )
+    	{
+		
+	emit_sound( iEnt, CHAN_WEAPON, gFbExplodeSound, VOL_NORM, ATTN_NORM, 0, PITCH_NORM );
+	
+	static iSkillLevel;
+    iSkillLevel = SM_GetSkillLevel(iOwner, SKILL_HUNTER);
+    if (iSkillLevel > 0)
+    {
+		UTIL_KnockBack( iEnt, iOwner, p_hunter_power[iSkillLevel - 1], p_hunter_radius[iSkillLevel - 1] );
+	}	
+		
+		set_pev( iEnt, pev_flags, pev( iEnt, pev_flags ) | FL_KILLME );
+
+		return HAM_SUPERCEDE;
+	}
+	 
+	return HAM_IGNORED;
+}
+
+public bacon_Touch( iEnt )
+{
+	if( get_pdata_int( iEnt, m_bLightSmoke, m_XoGrenade ) == 0
+    	&& !( get_pdata_int( iEnt, m_bIsC4, m_XoGrenade ) & ( 1<<8 ) )
+	&& IsPlayer( ( pev( iEnt, pev_owner ) ) )
+	&& InstantExplode == 1 )
+    	{
+		set_pev( iEnt, pev_dmgtime, 0.0 );
+		
+		return HAM_HANDLED;
+	}
+	
+	return HAM_IGNORED;
+}
+
