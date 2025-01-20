@@ -389,6 +389,12 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 	{
 		MENU_ResetXP( id );
 	}
+	
+	else if ( CMD_Equal( id,  szCmd, "donate" ) || CMD_Equal( id, szCmd, "donatie" ) || CMD_Equal( id, szCmd, "doneaza" ) || CMD_Equal( id, szCmd, "vip" ) || CMD_Equal( id, szCmd, "admin" ))
+	{
+		menu_Donate_Options( id );
+	}
+
 
 	else if ( CMD_Equal( id,  szCmd, "itemsinfo" ) )
 	{
@@ -520,7 +526,7 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_AMULET );
 		}
 
-		else if ( CMD_Equal( id, szCmd, "socks" ) || CMD_Equal( id, szCmd, "sock" ) )
+		else if ( CMD_Equal( id, szCmd, "socks" ) || CMD_Equal( id, szCmd, "sock" ) || CMD_Equal( id, szCmd, "gravity" ) || CMD_Equal( id, szCmd, "jump" ) )
 		{
 			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_SOCK );
 		}

@@ -8,10 +8,19 @@ public ChooseTeam(id) {
 	return PLUGIN_CONTINUE;
 }
 
+public menu_Donate_Options( id )
+{
+	//show_motd(id, "addons/amxmodx/configs/war3ft/donate_hero/index.html", "Donate for Server")
+	show_motd(id, "http://daeva.ro/donate_hero/index.html", "Donate for Server")
+
+	
+	
+} 
+
 public MENU_War3Menu( id )
 {
 	static pos, szMenu[256], keys;
-	keys = (1<<0)|(1<<1)|(1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<9);
+	keys = (1<<0)|(1<<1)|(1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6)|(1<<9);
 	pos = 0;
 
 	// Add the title
@@ -24,6 +33,7 @@ public MENU_War3Menu( id )
 	pos += formatex( szMenu[pos], 255-pos, "\w4. %L^n", id, "HELP" );
 	pos += formatex( szMenu[pos], 255-pos, "\w5. %L^n^n", id, "ADMIN_MENU_TITLE" );
 	pos += formatex( szMenu[pos], 255-pos, "\y6. Team Menu^n^n");
+	pos += formatex( szMenu[pos], 255-pos, "\y7. Donate for Server^n^n");
 	pos += formatex( szMenu[pos], 255-pos, "^n\w0. %L", id, "WORD_EXIT" );
 
 	// Display the menu
@@ -51,6 +61,9 @@ public _MENU_War3Menu( id, key )
 			ChooseTeamOverrideActive[id] = false;
 			client_cmd(id, "chooseteam");
 		}
+		case 6: { 
+			menu_Donate_Options( id ); 
+		} 
 	}
 	
 	return PLUGIN_HANDLED;

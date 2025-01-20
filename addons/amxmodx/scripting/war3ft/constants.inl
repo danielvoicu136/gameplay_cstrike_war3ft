@@ -582,7 +582,7 @@ new bool:g_bPlayerSkills[33][MAX_SKILLS];		// Stores what skills the player has 
 new const Float:p_vampiric[3] =			{0.10,0.20,0.30}		// Vampiric Aura			(skill 1)
 new Float:p_unholy[3] =					{265.0,285.0,300.0}		// Unholy Aura				(skill 2)
 new Float:p_unholy_dod[3] =				{33.3,66.6,100.0}		// Unholy Aura				(skill 2)
-new const Float:p_levitation[3] =		{0.8,0.6,0.4}			// Levitation				(skill 3)
+new const Float:p_levitation[3] =		{0.7,0.5,0.3}			// Levitation				(skill 3)
 
 new const p_invisibility[3] =			{200,170,130}			// Invisibility				(skill 1)
 new const p_devotion =					15						// Devotion Aura			(skill 2)
@@ -626,8 +626,8 @@ new const p_hearth[11] =				{10,13,16,19,22,25,28,31,34,37,40}			// Hearth	(skil
 
 /* Super flash */ 
 
-new const Float:p_hunter_power[3] =				{100.0,150.0,200.0}				// Hunter Power 					(skill 3)
-new const Float:p_hunter_radius[3] =			{600.0,800.0,1000.0}			// Hunter Radius 				(skill 3)
+new const Float:p_hunter_power[3] =				{50.0,75.0,100.0}			// Hunter Power 					(skill 3)
+new const Float:p_hunter_radius[3] =			{300.0,400.0,500.0}			// Hunter Radius 				(skill 3)
 
 new const InstantExplode = 0; 
 
