@@ -44,7 +44,7 @@ public SHARED_INVIS_Set( id )
 		iInvisLevel = floatround( float( iInvisLevel ) / INVIS_CLOAK_DIVISOR );
 	}
 
-	if ( iInvisLevel )
+	if ( iInvisLevel && !SHARED_IsInvisBlockerNear(id) )
 	{
 		set_user_rendering( id, kRenderFxNone, 0, 0, 0, kRenderTransTexture, iInvisLevel );
 		
@@ -65,6 +65,38 @@ public SHARED_INVIS_ReSet( id ) {
 		set_user_rendering( id );
 		p_data_b[id][PB_INVIS] = false;
 } 
+
+
+// Function simply checks if an enemy with invisibility detection is near 
+SHARED_IsInvisBlockerNear( id )
+{
+	new vOrigin[3]; 
+	get_user_origin( id, vOrigin );
+	new players[32], numplayers, vTargetOrigin[3], i;
+	new iTeam = get_user_team( id );
+
+	// Get all players
+	get_players( players, numplayers, "a" );
+	
+	// Loop through all players and check for immunity
+	for ( i = 0; i < numplayers; i++ )
+	{
+		
+		// Make sure that the user we're looking at is on the opposite team of "id"
+		if ( get_user_team( players[i] ) != iTeam )
+		{	
+			get_user_origin( players[i], vTargetOrigin );
+			
+			// Check the distance
+			if ( ( get_distance( vOrigin, vTargetOrigin ) <= INVIS_DETECTION_RADIUS )  &&  ( ITEM_Has( players[i], ITEM_PROTECTANT ) > ITEM_NONE ) )
+			{
+				return true;	
+			}
+		}
+	}
+
+	return false;
+}
 
 // Function will return true if their active weapon is a knife
 public SHARED_IsHoldingKnife( id )

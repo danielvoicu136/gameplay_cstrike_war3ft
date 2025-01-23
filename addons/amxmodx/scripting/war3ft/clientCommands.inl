@@ -390,7 +390,7 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 		MENU_ResetXP( id );
 	}
 	
-	else if ( CMD_Equal( id,  szCmd, "donate" ) || CMD_Equal( id, szCmd, "donatie" ) || CMD_Equal( id, szCmd, "doneaza" ) || CMD_Equal( id, szCmd, "vip" ) || CMD_Equal( id, szCmd, "admin" ))
+	else if ( CMD_Equal( id,  szCmd, "donate" ) || CMD_Equal( id, szCmd, "donatie" ) || CMD_Equal( id, szCmd, "doneaza" ) || CMD_Equal( id, szCmd, "vip" ) )
 	{
 		menu_Donate_Options( id );
 	}

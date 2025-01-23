@@ -14,6 +14,51 @@ public NS_Ult_DarkAscension( id )
 		return;
 	}
 	
+	// User can't use ultimate while planting or defusing!
+	if ( p_data_b[id][PB_ISPLANTING] )
+	{
+		client_print( id, print_center, "You cannot use your ultimate while planting the bomb!" );
+		return;
+	}
+	
+	// User can't Blink when he/she's stunned
+	if ( p_data_b[id][PB_STUNNED] )
+	{
+		WC3_StatusText( id, 0, "You can't ultimate when you're stunned!" );
+
+		return;
+	}
+	
+	
+	new vOldLocation[3]
+	get_user_origin( id, vOldLocation );
+	
+	new iPlayerOldCheck = WC3_IsImmunePlayerNear( id, vOldLocation );
+	
+	new iLosesCharge = 0;
+	if ( iPlayerOldCheck > 0 )
+	{
+		iLosesCharge = iPlayerOldCheck;
+	}
+	
+		// Make sure a nearby enemy doesn't have immunity
+	if ( iLosesCharge > 0 )
+	{
+		// Remove charge since player blocked it!
+		ULT_RemoveCharge( iLosesCharge, 3 );
+
+		//set_hudmessage( 255, 255, 10, -1.0, -0.4, 1, 0.5, BLINK_COOLDOWN, 0.2, 0.2 ,-1 );
+		//WC3_StatusText( id, 0, "Your ultimate has been blocked!" );
+		
+		// Reset the user's ultimate
+		ULT_ResetCooldown( id, get_pcvar_num( CVAR_wc3_ult_cooldown ) );
+
+		// Display ultimate blocked message
+		ULT_Blocked( id );
+
+		return;
+	}
+	
 
 	ULT_ResetCooldown( id, get_pcvar_num( CVAR_wc3_ult_cooldown ) + NS_ASCENSION_DURATION, false );
 

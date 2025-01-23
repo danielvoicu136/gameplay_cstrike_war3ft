@@ -5,6 +5,7 @@
 
 #define INVIS_CLOAK_DIVISOR		2.0
 #define INVIS_SPEED_LIMIT		35.0
+#define INVIS_DETECTION_RADIUS	950 
 
 
 #define DOD_REINC_READY				0
