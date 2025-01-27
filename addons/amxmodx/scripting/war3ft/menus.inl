@@ -20,7 +20,7 @@ public menu_Donate_Options( id )
 public MENU_War3Menu( id )
 {
 	static pos, szMenu[256], keys;
-	keys = (1<<0)|(1<<1)|(1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6)|(1<<9);
+	keys = (1<<0)|(1<<1)|(1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6)|(1<<7)|(1<<9);
 	pos = 0;
 
 	// Add the title
@@ -34,6 +34,7 @@ public MENU_War3Menu( id )
 	pos += formatex( szMenu[pos], 255-pos, "\w5. %L^n^n", id, "ADMIN_MENU_TITLE" );
 	pos += formatex( szMenu[pos], 255-pos, "\y6. Team Menu^n^n");
 	pos += formatex( szMenu[pos], 255-pos, "\y7. Donate for Server^n^n");
+	pos += formatex( szMenu[pos], 255-pos, "\y8. Race Knife ?^n^n");
 	pos += formatex( szMenu[pos], 255-pos, "^n\w0. %L", id, "WORD_EXIT" );
 
 	// Display the menu
@@ -64,9 +65,30 @@ public _MENU_War3Menu( id, key )
 		case 6: { 
 			menu_Donate_Options( id ); 
 		} 
+		
+		case 7: { 
+			SWITCH_Knife( id );
+		} 
 	}
 	
 	return PLUGIN_HANDLED;
+}
+
+public SWITCH_Knife(id) {
+
+	if(is_user_connected(id)) 
+	{ 
+		g_UseRaceKnife[id] = !g_UseRaceKnife[id];
+	
+		if(g_UseRaceKnife[id]) 
+		{
+			client_print( id, print_chat, "%s Race Knife : ON", g_MODclient );
+		} 
+		else 
+		{
+			client_print( id, print_chat, "%s Race Knife : OFF", g_MODclient );
+		} 
+	} 
 }
 
 public menu_Skill_Options( id )

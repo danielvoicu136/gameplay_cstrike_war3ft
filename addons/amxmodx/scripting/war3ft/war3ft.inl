@@ -130,6 +130,21 @@ public WC3_Precache()
 	copy( g_szRaceSprites[RACE_CRYPT]		, 63, "sprites/warcraft3/races/wc3_cryptlord_01.spr"	);
 	copy( g_szRaceSprites[RACE_STALKER]		, 63, "sprites/warcraft3/races/wc3_nightstalker_01.spr"	);
 	copy( g_szRaceSprites[RACE_CHAMELEON]	, 63, "sprites/warcraft3/races/wc3_chameleon_01.spr"	);
+	
+	
+		// Store race knife names
+	copy( g_szRaceVKnife[RACE_NONE]			, 63, "models/warcraft3/races/v_none.mdl"				);
+	copy( g_szRaceVKnife[RACE_UNDEAD]		, 63, "models/warcraft3/races/v_undead_2.mdl"			);
+	copy( g_szRaceVKnife[RACE_HUMAN]		, 63, "models/warcraft3/races/v_human.mdl"				);
+	copy( g_szRaceVKnife[RACE_ORC]			, 63, "models/warcraft3/races/v_orc.mdl"				);
+	copy( g_szRaceVKnife[RACE_ELF]			, 63, "models/warcraft3/races/v_elf_2.mdl"				);
+	copy( g_szRaceVKnife[RACE_BLOOD]		, 63, "models/warcraft3/races/v_bloodmage_2.mdl"		);
+	copy( g_szRaceVKnife[RACE_SHADOW]		, 63, "models/warcraft3/races/v_shaman_2.mdl"			);
+	copy( g_szRaceVKnife[RACE_WARDEN]		, 63, "models/warcraft3/races/v_warden.mdl"				);
+	copy( g_szRaceVKnife[RACE_CRYPT]		, 63, "models/warcraft3/races/v_cryptlord_2.mdl"		);
+	copy( g_szRaceVKnife[RACE_STALKER]		, 63, "models/warcraft3/races/v_reaper.mdl"				);
+	copy( g_szRaceVKnife[RACE_CHAMELEON]	, 63, "models/warcraft3/races/v_chameleon_2.mdl"		);
+	
 
 	// Store level sprite names
 	for ( i = 0; i < 11; i++ )
@@ -197,6 +212,17 @@ public WC3_Precache()
 			bError = true;
 		}
 	}
+	
+		// Check the race v knife models 
+	for ( i = 0; i <= MAX_RACES; i++ )
+	{
+		if ( !file_exists( g_szRaceVKnife[i] ) )
+		{
+			WC3_Log( true, "[ERROR] Missing model file '%s'", g_szRaceVKnife[i] );
+
+			bError = true;
+		}
+	}
 
 
 	// Check the level sprites
@@ -237,6 +263,13 @@ public WC3_Precache()
 				for ( i = 0; i <= MAX_RACES; i++ )
 				{
 					g_iRaceSprites[i] = precache_model( g_szRaceSprites[i] );
+				}
+				
+				// Precache race v knife 
+				for ( i = 0; i <= MAX_RACES; i++ )
+				{
+					// g_iRaceVKnife[i] = precache_model( g_szRaceVKnife[i] );
+					precache_model( g_szRaceVKnife[i] );
 				}
 
 				// Precache level sprites

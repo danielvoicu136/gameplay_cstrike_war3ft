@@ -343,7 +343,7 @@ public client_putinserver( id )
 	{
 		return;
 	}
-	
+	g_UseRaceKnife[id] = false;
 	ChooseTeamOverrideActive[id] = true;
 
 	// Check for steam ID pending
@@ -471,6 +471,8 @@ public client_disconnect( id )
 	{
 		return;
 	}
+	
+	g_UseRaceKnife[id] = false;
 
 	// Update the user's timestamps for each race if we're saving XP
 	DB_UpdateTimestamp( id );

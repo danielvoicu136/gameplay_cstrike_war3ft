@@ -308,9 +308,14 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 
 	else if ( CMD_Equal( id,  szCmd, "war3help" ) || CMD_Equal( id, szCmd, "help" ) )
 	{
-		MOTD_War3help(id)
+		MOTD_War3help(id);
 	}
-
+	
+	else if ( CMD_Equal( id,  szCmd, "knife" ) || CMD_Equal( id, szCmd, "knives" )  || CMD_Equal( id, szCmd, "cutit" ) )
+	{
+		SWITCH_Knife(id);
+	}
+	
 	else if ( CMD_Equal( id,  szCmd, "icons" ) )
 	{
 

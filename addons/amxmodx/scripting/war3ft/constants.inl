@@ -760,4 +760,10 @@ new bool:g_bCZBotRegisterHam
 new bool:ChooseTeamOverrideActive[33];
 
 // Used by Dark Ascension 
-new g_lastPosition[33][3]
+new g_lastPosition[33][3]; 
+
+
+// V Models 
+new g_szRaceVKnife[MAX_RACES + 1][64];
+new g_iRaceVKnife[MAX_RACES + 1];
+new bool:g_UseRaceKnife[33];

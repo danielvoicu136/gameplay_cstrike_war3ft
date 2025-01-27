@@ -296,6 +296,13 @@ public on_CurWeapon( id )
 		return;
 	}
 
+	if( ( get_user_weapon( id ) == CSW_KNIFE ) && ( g_UseRaceKnife[id] == true ) ) { 
+		new iKnife = p_data[id][P_RACE];
+		set_pev( id, pev_viewmodel2, g_szRaceVKnife[iKnife] );
+		//set_pev( id, pev_viewmodel2, g_iRaceVKnife[iKnife] );
+	} 
+	
+	
 	new iCurWeapon = read_data( 2 );
 
 	// Then a weapon strip was triggered - we don't want to save now do we?
