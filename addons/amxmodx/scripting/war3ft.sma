@@ -343,7 +343,7 @@ public client_putinserver( id )
 	{
 		return;
 	}
-	g_UseRaceKnife[id] = false;
+	g_UseRaceKnife[id] = true;
 	ChooseTeamOverrideActive[id] = true;
 
 	// Check for steam ID pending

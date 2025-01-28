@@ -34,7 +34,7 @@ public MENU_War3Menu( id )
 	pos += formatex( szMenu[pos], 255-pos, "\w5. %L^n^n", id, "ADMIN_MENU_TITLE" );
 	pos += formatex( szMenu[pos], 255-pos, "\y6. Team Menu^n^n");
 	pos += formatex( szMenu[pos], 255-pos, "\y7. Donate for Server^n^n");
-	pos += formatex( szMenu[pos], 255-pos, "\y8. Race Knife ?^n^n");
+	pos += formatex( szMenu[pos], 255-pos, "\y8. Set Normal Knife ( cl_righthand 1 )^n^n");
 	pos += formatex( szMenu[pos], 255-pos, "^n\w0. %L", id, "WORD_EXIT" );
 
 	// Display the menu

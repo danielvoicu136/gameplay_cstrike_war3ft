@@ -646,7 +646,17 @@ const m_XoGrenade = 5;
 
 
 
-new MOTD_header[] = "<html><head><LINK REL=^"StyleSheet^" HREF=^"wc3.css^" TYPE=^"text/css^"></head><body>";
+//new MOTD_header[] = "<html><head><LINK REL=^"StyleSheet^" HREF=^"wc3.css^" TYPE=^"text/css^"></head><body>";
+new MOTD_header[] = "<html><head><link rel=^"stylesheet^" href=^"http://daeva.ro/donate_hero/war3ft.css^" TYPE=^"text/css^"></head><body>";
+
+/*
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<html>");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<head>");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<meta charset=^"utf-8^">");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<link rel=^"stylesheet^" href=^"http://perfect-soft.su/css/cssb.css^" type=^"text/css^">");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "</head>");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<body>");
+*/
 
 // SOUNDS
 #define MAX_SOUNDS	29

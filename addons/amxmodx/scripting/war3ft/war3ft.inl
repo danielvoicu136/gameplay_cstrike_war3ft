@@ -133,17 +133,17 @@ public WC3_Precache()
 	
 	
 		// Store race knife names
-	copy( g_szRaceVKnife[RACE_NONE]			, 63, "models/warcraft3/races/v_none.mdl"				);
-	copy( g_szRaceVKnife[RACE_UNDEAD]		, 63, "models/warcraft3/races/v_undead_2.mdl"			);
-	copy( g_szRaceVKnife[RACE_HUMAN]		, 63, "models/warcraft3/races/v_human.mdl"				);
-	copy( g_szRaceVKnife[RACE_ORC]			, 63, "models/warcraft3/races/v_orc.mdl"				);
-	copy( g_szRaceVKnife[RACE_ELF]			, 63, "models/warcraft3/races/v_elf_2.mdl"				);
-	copy( g_szRaceVKnife[RACE_BLOOD]		, 63, "models/warcraft3/races/v_bloodmage_2.mdl"		);
-	copy( g_szRaceVKnife[RACE_SHADOW]		, 63, "models/warcraft3/races/v_shaman_2.mdl"			);
-	copy( g_szRaceVKnife[RACE_WARDEN]		, 63, "models/warcraft3/races/v_warden.mdl"				);
-	copy( g_szRaceVKnife[RACE_CRYPT]		, 63, "models/warcraft3/races/v_cryptlord_2.mdl"		);
-	copy( g_szRaceVKnife[RACE_STALKER]		, 63, "models/warcraft3/races/v_reaper.mdl"				);
-	copy( g_szRaceVKnife[RACE_CHAMELEON]	, 63, "models/warcraft3/races/v_chameleon_2.mdl"		);
+	copy( g_szRaceVKnife[RACE_NONE]			, 63, "models/warcraft3/races/v_0_none.mdl"				);		// OK - Katana 
+	copy( g_szRaceVKnife[RACE_UNDEAD]		, 63, "models/warcraft3/races/v_1_undead.mdl"			);		// OK - Claws  
+	copy( g_szRaceVKnife[RACE_HUMAN]		, 63, "models/warcraft3/races/v_2_human.mdl"			);		// OK - Halo 	
+	copy( g_szRaceVKnife[RACE_ORC]			, 63, "models/warcraft3/races/v_3_orc.mdl"				);		// OK - Red Axe  
+	copy( g_szRaceVKnife[RACE_ELF]			, 63, "models/warcraft3/races/v_4_elf.mdl"				);		// OK - Elf Knife 
+	copy( g_szRaceVKnife[RACE_BLOOD]		, 63, "models/warcraft3/races/v_5_bloodmage.mdl"		);		// OK - Golden Axe 
+	copy( g_szRaceVKnife[RACE_SHADOW]		, 63, "models/warcraft3/races/v_6_shaman.mdl"			);		// OK - Dark Axe  
+	copy( g_szRaceVKnife[RACE_WARDEN]		, 63, "models/warcraft3/races/v_7_warden.mdl"			);		// OK -  
+	copy( g_szRaceVKnife[RACE_CRYPT]		, 63, "models/warcraft3/races/v_8_cryptlord.mdl"		);		// OK - 
+	copy( g_szRaceVKnife[RACE_STALKER]		, 63, "models/warcraft3/races/v_9_reaper.mdl"			);		// OK - Skeleton Axe 
+	copy( g_szRaceVKnife[RACE_CHAMELEON]	, 63, "models/warcraft3/races/v_0_chameleon.mdl"		);		// OK - Katana 
 	
 
 	// Store level sprite names

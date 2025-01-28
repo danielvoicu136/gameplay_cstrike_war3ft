@@ -26,6 +26,8 @@ public _ULT_Delay()
 			ULT_IconHandler( id );
 		}
 		
+		client_cmd( id, "cl_righthand 1" );
+		
 		// Human FIX --- set the invisibility when low speed 
 		static iSkillLevelInvisibility;
 		iSkillLevelInvisibility = SM_GetSkillLevel( id, SKILL_INVISIBILITY );
