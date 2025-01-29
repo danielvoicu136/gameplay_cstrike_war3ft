@@ -1,0 +1,116 @@
+body
+{
+	color: white;
+	font-family: Verdana, Tahoma, Arial;
+	font-size: 12px;
+	background: #000000;
+	margin-top: 8px;
+	margin-left: 16px;
+}
+
+h1
+{
+	font-size: 20px;
+	color: #60BAF6;
+	border:0;
+	margin:0;
+	margin-bottom:10px;
+}
+
+h2
+{
+	font-size: 12px;
+	color: #FFAB00;
+	border:0;
+	margin:0;
+	margin-bottom:10px;
+}
+
+h3
+{
+	font-size: 16px;
+	color: #FFEEFF;
+	margin-top: 8px;
+	margin-bottom: 5px;
+}
+
+dt
+{
+	font: 17px serif;
+	color: #69F902;
+}
+
+dd
+{
+	font: italic 14px;
+	color: #FFFC00;
+}
+
+
+div
+{
+	color:#FFB000;
+}
+
+#title
+{
+	font-size: 16px;
+	color:#00FF00;
+	text-align:center;
+	font-weight:bold;
+}
+
+#s
+{
+	text-indent:35px;
+	width:650px;
+}
+
+ul
+{
+	margin-top:0px;
+	margin-bottom:10px;
+	color:#FFB000;
+}
+
+b
+{
+	color:#00FF00;
+}
+
+
+li
+{
+	margin-bottom: 1px;
+	color: #F4D285;
+}
+
+/* Terrorist color */
+#t
+{
+	color:#FF3F3F;
+}
+
+/* CT color */
+#c
+{
+	color:#99CCFF;
+}
+
+/* Ally color */
+#a
+{
+	color:#4A654A;
+}
+
+/* Axis color */
+#x
+{
+	color:#FF3C42;
+}
+
+/* Spectator color */
+#p
+{
+	color:#FFFFFF;
+}

@@ -9,19 +9,19 @@ ITEM_Init()
 	ITEM_COST[ITEM_BOOTS]       = 2500;			// Boots of Speed
 	ITEM_COST[ITEM_CLAWS]	    = 1000;			// Claws of Attack
 	ITEM_COST[ITEM_CLOAK]	    = 800;			// Cloak of Shadows
-	ITEM_COST[ITEM_MASK]	    = 2000;			// Mask of Death
+	ITEM_COST[ITEM_MASK]	    = 2500;			// Mask of Death
 	ITEM_COST[ITEM_NECKLACE]	= 800;			// Necklace of Immunity
 	ITEM_COST[ITEM_FROST]	    = 2000;			// Orb of Frost
 	ITEM_COST[ITEM_HEALTH]	    = 1000;			// Periapt of Health
-	ITEM_COST[ITEM_TOME]	    = 4000;			// Tome of Experience
+	ITEM_COST[ITEM_TOME]	    = 3500;			// Tome of Experience
 	ITEM_COST[ITEM_SCROLL]	    = 3000;			// Scroll of Respawning
 	ITEM_COST[ITEM_PROTECTANT]	= 1500;			// Mole Protectant
 	ITEM_COST[ITEM_HELM]	    = 3000;			// Helm of Excellence
 	ITEM_COST[ITEM_AMULET]	    = 1500;			// Amulet of the Cat
 	ITEM_COST[ITEM_SOCK]	    = 1500;			// Sock of the Feather
 	ITEM_COST[ITEM_GLOVES]	    = 1700;			// Flaming Gloves of Warmth
-	ITEM_COST[ITEM_RING]	    = 500;			// Ring of Regeneration + 1
-	ITEM_COST[ITEM_CHAMELEON]	= 4500;			// Chameleon
+	ITEM_COST[ITEM_RING]	    = 700;			// Ring of Regeneration + 1
+	ITEM_COST[ITEM_CHAMELEON]	= 3500;			// Chameleon
 	ITEM_COST[ITEM_MOLE]	    = 9000;			// Mole
 
 	// Item costs are a little different for DOD
