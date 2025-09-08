@@ -729,20 +729,13 @@ public bacon_Think( iEnt )
 	&& get_pdata_int( iEnt, m_bLightSmoke, m_XoGrenade ) == 0
     	&& !( get_pdata_int( iEnt, m_bIsC4, m_XoGrenade ) & ( 1<<8 ) )
 	&& IsPlayer( ( iOwner = pev( iEnt, pev_owner ) ) ) )
-    	{
-		
-	emit_sound( iEnt, CHAN_WEAPON, gFbExplodeSound, VOL_NORM, ATTN_NORM, 0, PITCH_NORM );
-	
-	static iSkillLevel;
-    iSkillLevel = SM_GetSkillLevel(iOwner, SKILL_HUNTER);
-    if (iSkillLevel > 0)
     {
-		UTIL_KnockBack( iEnt, iOwner, p_hunter_power[iSkillLevel - 1], p_hunter_radius[iSkillLevel - 1] );
-	}	
-		
-		set_pev( iEnt, pev_flags, pev( iEnt, pev_flags ) | FL_KILLME );
-
-		return HAM_SUPERCEDE;
+			static iSkillLevel;
+		    iSkillLevel = SM_GetSkillLevel(iOwner, SKILL_HUNTER);
+		    if (iSkillLevel > 0)
+		    {
+				UTIL_KnockBack( iEnt, iOwner, p_hunter_power[iSkillLevel - 1], p_hunter_radius[iSkillLevel - 1] );
+			}	
 	}
 	 
 	return HAM_IGNORED;
@@ -755,11 +748,10 @@ public bacon_Touch( iEnt )
 	&& IsPlayer( ( pev( iEnt, pev_owner ) ) )
 	&& InstantExplode == 1 )
     	{
-		set_pev( iEnt, pev_dmgtime, 0.0 );
-		
-		return HAM_HANDLED;
+			set_pev( iEnt, pev_dmgtime, 0.0 );
+			
+			return HAM_HANDLED;
 	}
-	
 	return HAM_IGNORED;
 }
 
