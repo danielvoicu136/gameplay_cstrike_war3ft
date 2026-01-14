@@ -86,6 +86,28 @@ new CVAR_bot_quota;
 // DOD CVARs
 new CVAR_wc3_dod_start_money;
 
+// CVAR Cost Items 
+new CVAR_wc3_cost_ankh;
+new CVAR_wc3_cost_boots;
+new CVAR_wc3_cost_claws;
+new CVAR_wc3_cost_cloak;
+new CVAR_wc3_cost_mask;
+new CVAR_wc3_cost_necklace;
+new CVAR_wc3_cost_frost;
+new CVAR_wc3_cost_health;
+new CVAR_wc3_cost_tome;
+new CVAR_wc3_cost_scroll;
+new CVAR_wc3_cost_protectant;
+new CVAR_wc3_cost_helm;
+new CVAR_wc3_cost_amulet;
+new CVAR_wc3_cost_sock;
+new CVAR_wc3_cost_gloves;
+new CVAR_wc3_cost_ring;
+new CVAR_wc3_cost_chameleon;
+new CVAR_wc3_cost_mole;
+
+
+
 public CVAR_Init()
 {
 	// Plugin Information CVARs
@@ -187,6 +209,27 @@ public CVAR_Init()
 	CVAR_wc3_dod_start_money		= register_cvar( "wc3_dod_start_money"		, "800"							);
 
 	CVAR_bot_quota					= get_cvar_pointer( "bot_quota" );
+
+	// CVAR Cost Items 
+
+    CVAR_wc3_cost_ankh        = register_cvar("wc3_cost_ankh", "1500");   // Ankh of Reincarnation
+    CVAR_wc3_cost_boots       = register_cvar("wc3_cost_boots", "2500");  // Boots of Speed
+    CVAR_wc3_cost_claws       = register_cvar("wc3_cost_claws", "1000");  // Claws of Attack
+    CVAR_wc3_cost_cloak       = register_cvar("wc3_cost_cloak", "800");   // Cloak of Shadows
+    CVAR_wc3_cost_mask        = register_cvar("wc3_cost_mask", "2500");  // Mask of Death
+    CVAR_wc3_cost_necklace    = register_cvar("wc3_cost_necklace", "800");// Necklace of Immunity
+    CVAR_wc3_cost_frost       = register_cvar("wc3_cost_frost", "2000");  // Orb of Frost
+    CVAR_wc3_cost_health      = register_cvar("wc3_cost_health", "1000"); // Periapt of Health
+    CVAR_wc3_cost_tome        = register_cvar("wc3_cost_tome", "3500");   // Tome of Experience
+    CVAR_wc3_cost_scroll      = register_cvar("wc3_cost_scroll", "3000"); // Scroll of Respawning
+    CVAR_wc3_cost_protectant  = register_cvar("wc3_cost_protectant", "1500"); // Mole Protectant
+    CVAR_wc3_cost_helm        = register_cvar("wc3_cost_helm", "3000");   // Helm of Excellence
+    CVAR_wc3_cost_amulet      = register_cvar("wc3_cost_amulet", "1500"); // Amulet of the Cat
+    CVAR_wc3_cost_sock        = register_cvar("wc3_cost_sock", "1500");   // Sock of the Feather
+    CVAR_wc3_cost_gloves      = register_cvar("wc3_cost_gloves", "1700"); // Flaming Gloves
+    CVAR_wc3_cost_ring        = register_cvar("wc3_cost_ring", "700");    // Ring of Regeneration
+    CVAR_wc3_cost_chameleon   = register_cvar("wc3_cost_chameleon", "3500"); // Chameleon
+    CVAR_wc3_cost_mole        = register_cvar("wc3_cost_mole", "9000");   // Mole
 
 }
 
