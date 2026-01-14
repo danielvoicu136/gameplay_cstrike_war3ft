@@ -136,10 +136,10 @@ public positionChangeCheck(id)
 	iSkillLevel = SM_GetSkillLevel( id, SKILL_HUNTER );
 	if ( iSkillLevel > 0 )
 	{
-		/*
+		
 			give_item(id, "weapon_flashbang");
 			give_item(id, "weapon_flashbang");
-		*/
+		
 	}
 
 }
