@@ -402,6 +402,9 @@ public EVENT_Spawn( id )
 
 	// Give spawn bonus 
 	SHARED_SpawnExperienceBonus(id);
+	
+	// Convert over limit XP 
+	SHARED_ConvertOverLimitXP(id);
 
 	return HAM_HANDLED;
 }

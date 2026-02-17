@@ -219,6 +219,12 @@ public cmd_Ultimate(id)
 		{
 			SH_Ult_BigBadVoodoo( id );
 		}
+		
+		// NIGHT STALKER - Dark Ascension 
+		case ULTIMATE_ASCENSION:
+		{
+			NS_Ult_DarkAscension( id );
+		}
 
 		// WARDEN - Vengeance
 		case ULTIMATE_VENGEANCE:
@@ -302,9 +308,14 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 
 	else if ( CMD_Equal( id,  szCmd, "war3help" ) || CMD_Equal( id, szCmd, "help" ) )
 	{
-		MOTD_War3help(id)
+		MOTD_War3help(id);
 	}
-
+	
+	else if ( CMD_Equal( id,  szCmd, "knife" ) || CMD_Equal( id, szCmd, "knives" )  || CMD_Equal( id, szCmd, "cutit" ) )
+	{
+		SWITCH_Knife(id);
+	}
+	
 	else if ( CMD_Equal( id,  szCmd, "icons" ) )
 	{
 
@@ -383,6 +394,12 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 	{
 		MENU_ResetXP( id );
 	}
+	
+	else if ( CMD_Equal( id,  szCmd, "donate" ) || CMD_Equal( id, szCmd, "donatie" ) || CMD_Equal( id, szCmd, "doneaza" ) || CMD_Equal( id, szCmd, "vip" ) )
+	{
+		menu_Donate_Options( id );
+	}
+
 
 	else if ( CMD_Equal( id,  szCmd, "itemsinfo" ) )
 	{
@@ -514,7 +531,7 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_AMULET );
 		}
 
-		else if ( CMD_Equal( id, szCmd, "socks" ) || CMD_Equal( id, szCmd, "sock" ) )
+		else if ( CMD_Equal( id, szCmd, "socks" ) || CMD_Equal( id, szCmd, "sock" ) || CMD_Equal( id, szCmd, "gravity" ) || CMD_Equal( id, szCmd, "jump" ) )
 		{
 			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_SOCK );
 		}
@@ -524,7 +541,7 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_GLOVES );
 		}
 
-		else if ( CMD_Equal( id,  szCmd, "rings" )  || CMD_Equal( id, szCmd, "regen" ) )
+		else if ( CMD_Equal( id,  szCmd, "rings" )  || CMD_Equal( id, szCmd, "regen" ) || CMD_Equal( id, szCmd, "ring" ) )
 		{
 			if ( ITEM_MenuCanBuyCheck( id ) ) ITEM_BuyRings( id );
 		}
@@ -532,6 +549,11 @@ CMD_Handle( id, szCmd[], bool:bThroughSay )
 		else if ( CMD_Equal( id, szCmd, "chameleon" ) || CMD_Equal( id, szCmd, "skin" ) )
 		{
 			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_CHAMELEON );
+		}
+		
+		else if ( CMD_Equal( id, szCmd, "gem" ) || CMD_Equal( id, szCmd, "guard" ) || CMD_Equal( id, szCmd, "protectant" )  )
+		{
+			if (ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_PROTECTANT );
 		}
 
 		else if ( CMD_Equal( id, szCmd, "mole" ) )
@@ -581,7 +603,14 @@ CMD_Equal( id,  szCmd[], szCorrectCmd[] )
 
 public bindOpenShop(id)
 {
-	// MENU_Shop( id );
+	MENU_Shopmenu( id, 0 );
+
+    return PLUGIN_HANDLED
+}
+
+public bindOpenShop2(id)
+{
+	MENU_Shopmenu( id, 9 );
 
     return PLUGIN_HANDLED
 }

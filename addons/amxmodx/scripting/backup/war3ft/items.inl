@@ -5,24 +5,46 @@
 // Item Setup Functions
 ITEM_Init()
 {
-	ITEM_COST[ITEM_ANKH]	    = 1500;			// Ankh of Reincarnation
-	ITEM_COST[ITEM_BOOTS]       = 2500;			// Boots of Speed
-	ITEM_COST[ITEM_CLAWS]	    = 1000;			// Claws of Attack
-	ITEM_COST[ITEM_CLOAK]	    = 800;			// Cloak of Shadows
-	ITEM_COST[ITEM_MASK]	    = 2000;			// Mask of Death
-	ITEM_COST[ITEM_NECKLACE]	= 800;			// Necklace of Immunity
-	ITEM_COST[ITEM_FROST]	    = 2000;			// Orb of Frost
-	ITEM_COST[ITEM_HEALTH]	    = 1000;			// Periapt of Health
-	ITEM_COST[ITEM_TOME]	    = 4000;			// Tome of Experience
-	ITEM_COST[ITEM_SCROLL]	    = 6000;			// Scroll of Respawning
-	ITEM_COST[ITEM_PROTECTANT]	= 1500;			// Mole Protectant
-	ITEM_COST[ITEM_HELM]	    = 3000;			// Helm of Excellence
-	ITEM_COST[ITEM_AMULET]	    = 1500;			// Amulet of the Cat
-	ITEM_COST[ITEM_SOCK]	    = 1500;			// Sock of the Feather
-	ITEM_COST[ITEM_GLOVES]	    = 1700;			// Flaming Gloves of Warmth
-	ITEM_COST[ITEM_RING]	    = 500;			// Ring of Regeneration + 1
-	ITEM_COST[ITEM_CHAMELEON]	= 4500;			// Chameleon
-	ITEM_COST[ITEM_MOLE]	    = 16000;		// Mole
+	/*
+		ITEM_COST[ITEM_ANKH]	    = 1500;			// Ankh of Reincarnation
+		ITEM_COST[ITEM_BOOTS]       = 2500;			// Boots of Speed
+		ITEM_COST[ITEM_CLAWS]	    = 1000;			// Claws of Attack
+		ITEM_COST[ITEM_CLOAK]	    = 800;			// Cloak of Shadows
+		ITEM_COST[ITEM_MASK]	    = 2500;			// Mask of Death
+		ITEM_COST[ITEM_NECKLACE]	= 800;			// Necklace of Immunity
+		ITEM_COST[ITEM_FROST]	    = 2000;			// Orb of Frost
+		ITEM_COST[ITEM_HEALTH]	    = 1000;			// Periapt of Health
+		ITEM_COST[ITEM_TOME]	    = 3500;			// Tome of Experience
+		ITEM_COST[ITEM_SCROLL]	    = 3000;			// Scroll of Respawning
+		ITEM_COST[ITEM_PROTECTANT]	= 1500;			// Mole Protectant
+		ITEM_COST[ITEM_HELM]	    = 3000;			// Helm of Excellence
+		ITEM_COST[ITEM_AMULET]	    = 1500;			// Amulet of the Cat
+		ITEM_COST[ITEM_SOCK]	    = 1500;			// Sock of the Feather
+		ITEM_COST[ITEM_GLOVES]	    = 1700;			// Flaming Gloves of Warmth
+		ITEM_COST[ITEM_RING]	    = 700;			// Ring of Regeneration + 1
+		ITEM_COST[ITEM_CHAMELEON]	= 3500;			// Chameleon
+		ITEM_COST[ITEM_MOLE]	    = 9000;			// Mole
+	*/
+
+		ITEM_COST[ITEM_ANKH]        = get_pcvar_num(CVAR_wc3_cost_ankh);        // Ankh of Reincarnation
+		ITEM_COST[ITEM_BOOTS]       = get_pcvar_num(CVAR_wc3_cost_boots);       // Boots of Speed
+		ITEM_COST[ITEM_CLAWS]       = get_pcvar_num(CVAR_wc3_cost_claws);       // Claws of Attack
+		ITEM_COST[ITEM_CLOAK]       = get_pcvar_num(CVAR_wc3_cost_cloak);       // Cloak of Shadows
+		ITEM_COST[ITEM_MASK]        = get_pcvar_num(CVAR_wc3_cost_mask);        // Mask of Death
+		ITEM_COST[ITEM_NECKLACE]    = get_pcvar_num(CVAR_wc3_cost_necklace);    // Necklace of Immunity
+		ITEM_COST[ITEM_FROST]       = get_pcvar_num(CVAR_wc3_cost_frost);       // Orb of Frost
+		ITEM_COST[ITEM_HEALTH]      = get_pcvar_num(CVAR_wc3_cost_health);      // Periapt of Health
+		ITEM_COST[ITEM_TOME]        = get_pcvar_num(CVAR_wc3_cost_tome);        // Tome of Experience
+		ITEM_COST[ITEM_SCROLL]      = get_pcvar_num(CVAR_wc3_cost_scroll);      // Scroll of Respawning
+		ITEM_COST[ITEM_PROTECTANT]  = get_pcvar_num(CVAR_wc3_cost_protectant);  // Mole Protectant
+		ITEM_COST[ITEM_HELM]        = get_pcvar_num(CVAR_wc3_cost_helm);        // Helm of Excellence
+		ITEM_COST[ITEM_AMULET]      = get_pcvar_num(CVAR_wc3_cost_amulet);      // Amulet of the Cat
+		ITEM_COST[ITEM_SOCK]        = get_pcvar_num(CVAR_wc3_cost_sock);        // Sock of the Feather
+		ITEM_COST[ITEM_GLOVES]      = get_pcvar_num(CVAR_wc3_cost_gloves);      // Flaming Gloves of Warmth
+		ITEM_COST[ITEM_RING]        = get_pcvar_num(CVAR_wc3_cost_ring);        // Ring of Regeneration + 1
+		ITEM_COST[ITEM_CHAMELEON]   = get_pcvar_num(CVAR_wc3_cost_chameleon);   // Chameleon
+		ITEM_COST[ITEM_MOLE]        = get_pcvar_num(CVAR_wc3_cost_mole);        // Mole
+
 
 	// Item costs are a little different for DOD
 	if ( g_MOD == GAME_DOD )
@@ -468,6 +490,7 @@ ITEM_GiveBonuses( id, iItem )
 			{
 				_ITEM_Ring( id );
 			}
+			ITEM_BuyRings( id ); 
 		}
 
 		case ITEM_CHAMELEON:

@@ -754,7 +754,7 @@ new Float:g_fLastSpecDisplay[33];
 // Lets keep track of what team the player is on!
 new g_iPlayerTeam[33];
 
-#define BOT_CAST_ULT_CHANCE		0.10
+#define BOT_CAST_ULT_CHANCE		0.90
 
 new bool:g_bCZBotRegisterHam
 
@@ -775,7 +775,6 @@ new g_lastPosition[33][3];
 
 // V Models 
 new g_szRaceVKnife[MAX_RACES + 1][64];
-new g_iRaceVKnife[MAX_RACES + 1];
 new bool:g_UseRaceKnife[33];
 
 // XP Bonus per Spawn 
@@ -812,3 +811,6 @@ new g_playerSpawns[33];
 #define SPRAY				201 			
 #define FLASHLIGHT 			100 
 
+// XP to Money Rate Level Maxim 
+
+#define XP_TO_MONEY_RATE 3.5 

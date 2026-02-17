@@ -230,5 +230,12 @@ LANG_GetSkillInfo( skill_id, id, skill_description[], len )
 		case SKILL_CARRIONBEETLES:		formatex ( skill_description, len, "%L", id, "SKILL_I_33" );
 		case ULTIMATE_LOCUSTSWARM:		formatex ( skill_description, len, "%L", id, "SKILL_I_34" );
 		case PASS_ORB:					formatex ( skill_description, len, "%L", id, "SKILL_I_35" );
+		
+		// Night Stalker 
+		case SKILL_VOID:				formatex ( skill_description, len, "%L", id, "SKILL_I_36" );
+		case SKILL_FEAR:				formatex ( skill_description, len, "%L", id, "SKILL_I_37" );
+		case SKILL_HUNTER:				formatex ( skill_description, len, "%L", id, "SKILL_I_38" );
+		case ULTIMATE_ASCENSION:		formatex ( skill_description, len, "%L", id, "SKILL_I_39" );
+		case PASS_HEARTH:				formatex ( skill_description, len, "%L", id, "SKILL_I_40" );
 	}
 }

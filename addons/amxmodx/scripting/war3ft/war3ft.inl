@@ -1735,8 +1735,6 @@ WC3_PostSpawn( id )
 	// Set the user's speed!
 	SHARED_SetSpeed( id );
 	
-	// Set the user's bonus reward!
-	SHARED_SetBonusReward( id );
 
 	// Give the user their item bonuses!
 	ITEM_GiveAllBonuses( id );

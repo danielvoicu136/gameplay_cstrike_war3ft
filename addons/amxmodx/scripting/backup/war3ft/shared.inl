@@ -44,7 +44,7 @@ public SHARED_INVIS_Set( id )
 		iInvisLevel = floatround( float( iInvisLevel ) / INVIS_CLOAK_DIVISOR );
 	}
 
-	if ( iInvisLevel )
+	if ( iInvisLevel && !SHARED_IsInvisBlockerNear(id) )
 	{
 		set_user_rendering( id, kRenderFxNone, 0, 0, 0, kRenderTransTexture, iInvisLevel );
 		
@@ -65,6 +65,38 @@ public SHARED_INVIS_ReSet( id ) {
 		set_user_rendering( id );
 		p_data_b[id][PB_INVIS] = false;
 } 
+
+
+// Function simply checks if an enemy with invisibility detection is near 
+SHARED_IsInvisBlockerNear( id )
+{
+	new vOrigin[3]; 
+	get_user_origin( id, vOrigin );
+	new players[32], numplayers, vTargetOrigin[3], i;
+	new iTeam = get_user_team( id );
+
+	// Get all players
+	get_players( players, numplayers, "a" );
+	
+	// Loop through all players and check for immunity
+	for ( i = 0; i < numplayers; i++ )
+	{
+		
+		// Make sure that the user we're looking at is on the opposite team of "id"
+		if ( get_user_team( players[i] ) != iTeam )
+		{	
+			get_user_origin( players[i], vTargetOrigin );
+			
+			// Check the distance
+			if ( ( get_distance( vOrigin, vTargetOrigin ) <= INVIS_DETECTION_RADIUS )  &&  ( ITEM_Has( players[i], ITEM_PROTECTANT ) > ITEM_NONE ) )
+			{
+				return true;	
+			}
+		}
+	}
+
+	return false;
+}
 
 // Function will return true if their active weapon is a knife
 public SHARED_IsHoldingKnife( id )
@@ -130,6 +162,18 @@ bool:SHARED_IsGrenade( iWeapon )
 		}
 	}
 
+	return false;
+}
+
+bool:SHARED_IsFlash( iWeapon )
+{
+	if ( g_MOD == GAME_CSTRIKE || g_MOD == GAME_CZERO )
+	{
+		if ( iWeapon == CSW_FLASHBANG  )
+		{
+			return true;
+		}
+	}
 	return false;
 }
 
@@ -1395,6 +1439,11 @@ bool:SHARED_ValidPlayer( id )
 	return true;
 }
 
+bool:SHARED_ConnectedValidPlayer(id)
+{
+    return (id > 0 && id <= MAXPLAYERS && is_user_connected(id));
+}
+
 #define MAXGLOW					150
 
 SHARED_Glow( id, iRed, iGreen, iBlue, iAll )
@@ -1632,7 +1681,7 @@ public _SHARED_Teleport( parm[] )
 }
 
 
-public SHARED_SetBonusReward(id) { 
+public SHARED_ExtraExperienceToMoney(id) { 
     if (p_data[id][P_LEVEL] < MAX_LEVELS) { 
         new iXP = random_num(10, 20);
         new iBonusXP = XP_Give(id, iXP); 
@@ -1673,4 +1722,91 @@ public SHARED_SetBonusReward(id) {
             }
         }
     }
+}
+
+
+public SHARED_AutoBuyTome(id)
+{
+    if(is_user_connected(id) && is_user_alive(id)) {
+    	new minMoney = 9000;
+    	new tomePrice = ITEM_Cost( id, ITEM_TOME );
+    	new totalCost = tomePrice + minMoney;
+    
+    	if(SHARED_GetUserMoney( id ) >= totalCost && p_data[id][P_LEVEL] < MAX_LEVELS)
+   	{
+        	if( ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_TOME );
+    	}
+    }
+}
+
+
+public SHARED_SpawnExperienceBonus(id)
+{
+			
+		if (is_user_alive(id) && p_data[id][P_LEVEL] < MAX_LEVELS)
+		{
+				g_playerSpawns[id]++;
+				//client_print(id, print_chat, "spawn increased");
+				
+			for (new i = 0; i < MAX_BONUS_ROUNDS; i++)
+			{
+				if (g_playerSpawns[id] == g_roundBonuses[i][0])
+				{
+					XP_Give( id, g_roundBonuses[i][1] );
+				
+					client_print(id, print_chat, "* [WAR3FT] XP Bonus : You earned %d XP for played time. The next bonus has more XP !", g_roundBonuses[i][1]);
+					emit_sound( id, CHAN_STATIC, "warcraft3/Tomes.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+					
+					break;
+				}
+			}
+			
+			   // Inform player about the next bonus
+			for (new i = 0; i < MAX_BONUS_ROUNDS; i++)
+			{
+				if (g_playerSpawns[id] < g_roundBonuses[i][0])
+				{
+					new spawnsLeft = g_roundBonuses[i][0] - g_playerSpawns[id];
+					if (spawnsLeft > 0)
+					{
+						client_print(id, print_chat, "* [WAR3FT] XP Bonus : Reward in %d spawns", spawnsLeft);
+					}
+					break;
+				}
+			}
+		
+       }
+}
+
+public SHARED_ConvertExperienceOverLimit( id ) {
+
+	if(is_user_connected(id) && p_data[id][P_LEVEL] >= MAX_LEVELS && p_data[id][P_RACE] > 0) {
+
+		if(get_user_bankxp(id) < 0) set_user_bankxp(id,0);
+		
+		new Float:fXPMult = get_pcvar_float( CVAR_wc3_xp_multiplier ); 
+		new iTotalXP = floatround(iXPLevelSaved[MAX_LEVELS] * fXPMult) + 1000; 
+		
+		// new iTotalXP = 525000; 
+		new iOverXP = 0; 
+		
+		
+		if( p_data[id][P_XP] > iTotalXP ) 
+		{
+			iOverXP = p_data[id][P_XP] - iTotalXP; 
+		}
+
+		if(iOverXP > 0) {
+
+			p_data[id][P_XP] -= iOverXP;
+			iOverXP = iOverXP / 2;
+			XP_Check( id );
+			new iCurrentBank = get_user_bankxp(id); 
+			new iTotalBank = iCurrentBank + iOverXP
+			set_user_bankxp(id, iTotalBank); 		
+			client_print(id, print_chat, "%s Self GiveXP : You earned %d XP transferred in Self GiveXP !",g_MODclient,iOverXP);
+			
+		}
+	}
+
 }

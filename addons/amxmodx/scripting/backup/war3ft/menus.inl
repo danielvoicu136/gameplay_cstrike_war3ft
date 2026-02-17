@@ -8,10 +8,19 @@ public ChooseTeam(id) {
 	return PLUGIN_CONTINUE;
 }
 
+public menu_Donate_Options( id )
+{
+	//show_motd(id, "addons/amxmodx/configs/war3ft/donate_hero/index.html", "Donate for Server")
+	show_motd(id, "http://daeva.ro/donate_hero/index.html", "Donate for Server")
+
+	
+	
+} 
+
 public MENU_War3Menu( id )
 {
 	static pos, szMenu[256], keys;
-	keys = (1<<0)|(1<<1)|(1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<9);
+	keys = (1<<0)|(1<<1)|(1<<2)|(1<<3)|(1<<4)|(1<<5)|(1<<6)|(1<<7)|(1<<9);
 	pos = 0;
 
 	// Add the title
@@ -24,6 +33,8 @@ public MENU_War3Menu( id )
 	pos += formatex( szMenu[pos], 255-pos, "\w4. %L^n", id, "HELP" );
 	pos += formatex( szMenu[pos], 255-pos, "\w5. %L^n^n", id, "ADMIN_MENU_TITLE" );
 	pos += formatex( szMenu[pos], 255-pos, "\y6. Team Menu^n^n");
+	pos += formatex( szMenu[pos], 255-pos, "\y7. Donate for Server^n^n");
+	pos += formatex( szMenu[pos], 255-pos, "\y8. Race Knife^n^n");
 	pos += formatex( szMenu[pos], 255-pos, "^n\w0. %L", id, "WORD_EXIT" );
 
 	// Display the menu
@@ -51,9 +62,33 @@ public _MENU_War3Menu( id, key )
 			ChooseTeamOverrideActive[id] = false;
 			client_cmd(id, "chooseteam");
 		}
+		case 6: { 
+			menu_Donate_Options( id ); 
+		} 
+		
+		case 7: { 
+			SWITCH_Knife( id );
+		} 
 	}
 	
 	return PLUGIN_HANDLED;
+}
+
+public SWITCH_Knife(id) {
+
+	if(is_user_connected(id)) 
+	{ 
+		g_UseRaceKnife[id] = !g_UseRaceKnife[id];
+	
+		if(g_UseRaceKnife[id]) 
+		{
+			client_print( id, print_chat, "%s Race Knife : ON", g_MODclient );
+		} 
+		else 
+		{
+			client_print( id, print_chat, "%s Race Knife : OFF", g_MODclient );
+		} 
+	} 
 }
 
 public menu_Skill_Options( id )
@@ -441,7 +476,7 @@ public MENU_ChangeRace( id, iRaceXP[MAX_RACES] )
 		num_to_str( iRaceXP[i], szXP, 15 );
 		
 		// Add the "Select a Hero" message if necessary
-		if ( i == 4 )
+		if ( i == 4 || i == 8)
 		{
 			pos += format( szMenu[pos], 512-pos, "%L", id, "SELECT_HERO" );
 		}
@@ -449,7 +484,11 @@ public MENU_ChangeRace( id, iRaceXP[MAX_RACES] )
 		// User's current race
 		if ( i == p_data[id][P_RACE] - 1 )
 		{
-			pos += formatex( szMenu[pos], 512-pos, "\d%d. %s\d\R%s^n", i + 1, szRaceName[i], ( (get_pcvar_num( CVAR_wc3_save_xp )) ? szXP : " " ) );
+		
+			new szKey[2];
+			getKeyString(i + 1, szKey, sizeof(szKey)); 
+			
+			pos += formatex( szMenu[pos], 512-pos, "\d%s. %s\d\R%s^n", szKey, szRaceName[i], ( (get_pcvar_num( CVAR_wc3_save_xp )) ? szXP : " " ) );
 
 			iKeys |= (1<<i);
 		}
@@ -457,7 +496,10 @@ public MENU_ChangeRace( id, iRaceXP[MAX_RACES] )
 		// Race the user wants to change to
 		else if ( i == p_data[id][P_CHANGERACE] - 1 )
 		{
-			pos += formatex( szMenu[pos], 512-pos, "\r%d. %s\r\R%s^n", i + 1, szRaceName[i], ( (get_pcvar_num( CVAR_wc3_save_xp )) ? szXP : " " ) );
+			new szKey[2];
+			getKeyString(i + 1, szKey, sizeof(szKey)); 
+			
+			pos += formatex( szMenu[pos], 512-pos, "\r%s. %s\r\R%s^n", szKey, szRaceName[i], ( (get_pcvar_num( CVAR_wc3_save_xp )) ? szXP : " " ) );
 
 			iKeys |= (1<<i);
 		}
@@ -511,7 +553,10 @@ public MENU_ChangeRace( id, iRaceXP[MAX_RACES] )
 			// Check to see if the user can choose this race (are there too many of this race?)
 			if ( bAllowRace )
 			{
-				pos += formatex( szMenu[pos], 512-pos, "\w%d. %s\y\R%s^n", i + 1, szRaceName[i], ( (get_pcvar_num( CVAR_wc3_save_xp )) ? szXP : " " ) );
+				new szKey[2];
+				getKeyString(i + 1, szKey, sizeof(szKey));
+			
+				pos += formatex( szMenu[pos], 512-pos, "\w%s. %s\y\R%s^n", szKey, szRaceName[i], ( (get_pcvar_num( CVAR_wc3_save_xp )) ? szXP : " " ) );
 
 				iKeys |= (1<<i);
 			}
@@ -519,29 +564,16 @@ public MENU_ChangeRace( id, iRaceXP[MAX_RACES] )
 			// If not, display the race, but don't give them a key to press
 			else
 			{
-				pos += formatex( szMenu[pos], 512-pos, "\d%d. %s\y\R%s^n", i + 1, szRaceName[i], ( (get_pcvar_num( CVAR_wc3_save_xp )) ? szXP : " " ) );
+				new szKey[2];
+				getKeyString(i + 1, szKey, sizeof(szKey));
+				
+				pos += formatex( szMenu[pos], 512-pos, "\d%s. %s\y\R%s^n", szKey, szRaceName[i], ( (get_pcvar_num( CVAR_wc3_save_xp )) ? szXP : " " ) );
 			}
 		}
 
 	}
 
 	iKeys |= (1<<i);
-	
-	// This is needed so we can make the Auto-Select option "0" if the number of races is 9
-	if ( get_pcvar_num( CVAR_wc3_races ) == 9 )
-	{
-		i = -1;
-	}
-
-	pos += format( szMenu[pos], 512-pos, "%L", id, "SELECT_RACE_FOOTER", i + 1 );
-	
-	// Add a cancel button to the bottom
-	if ( get_pcvar_num( CVAR_wc3_races ) != 9 )
-	{
-		iKeys |= (1<<9);
-
-		pos += format( szMenu[pos], 512-pos, "^n\w0. %L", id, "WORD_CANCEL" );
-	}
 	
 	// Show the menu to the user!
 	show_menu( id, iKeys, szMenu, -1 );
@@ -569,34 +601,14 @@ public _MENU_ChangeRace( id, key )
 	{
 		return PLUGIN_HANDLED;
 	}
-	
-	// User pressed 0 (cancel)
-	if ( get_pcvar_num( CVAR_wc3_races ) < 9 && key - 1 == get_pcvar_num( CVAR_wc3_races ) )
-	{
-		return PLUGIN_HANDLED;
-	}
 
 	// Save the current race data before we change
 	DB_SaveXP( id, false );
 
-	new iRace, iAutoSelectKey = KEY_0;
+	new iRace;
 	
-	if ( get_pcvar_num( CVAR_wc3_races ) != 9 )
-	{
-		iAutoSelectKey = get_pcvar_num( CVAR_wc3_races )
-	}
+	iRace = key + 1;
 	
-	// Auto select a race
-	if ( key == iAutoSelectKey )
-	{
-		iRace = random_num( 1, get_pcvar_num( CVAR_wc3_races ) );
-	}
-
-	// Otherwise race is set
-	else
-	{
-		iRace = key + 1;
-	}
 
 	// User currently has a race
 	if ( p_data[id][P_RACE] != 0 )

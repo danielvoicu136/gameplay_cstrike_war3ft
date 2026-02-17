@@ -1769,7 +1769,7 @@ public SHARED_SpawnExperienceBonus(id)
 					new spawnsLeft = g_roundBonuses[i][0] - g_playerSpawns[id];
 					if (spawnsLeft > 0)
 					{
-						client_print(id, print_chat, "* [WAR3FT] XP Bonus : Reward in %d spawns", spawnsLeft);
+						client_print(id, print_chat, "* [WAR3FT] XP Bonus : Reward in %d respawns", spawnsLeft);
 					}
 					break;
 				}
@@ -1778,7 +1778,10 @@ public SHARED_SpawnExperienceBonus(id)
        }
 }
 
-public SHARED_ConvertExperienceOverLimit( id ) {
+
+/* Backup for self gixe xp function 
+public SHARED_ConvertOverLimitXP(id) 
+{
 
 	if(is_user_connected(id) && p_data[id][P_LEVEL] >= MAX_LEVELS && p_data[id][P_RACE] > 0) {
 
@@ -1809,4 +1812,41 @@ public SHARED_ConvertExperienceOverLimit( id ) {
 		}
 	}
 
+}
+*/ 
+
+public SHARED_ConvertOverLimitXP(id)
+{
+    if (!is_user_connected(id)) return;
+    if (p_data[id][P_RACE] <= 0) return;
+    if (p_data[id][P_LEVEL] < MAX_LEVELS) return;
+
+    new Float:fXPMult = get_pcvar_float(CVAR_wc3_xp_multiplier);
+    new iTotalXP = floatround(iXPLevelSaved[MAX_LEVELS] * fXPMult) + 1000;
+
+    new iOverXP = 0;
+    if (p_data[id][P_XP] > iTotalXP)
+    {
+        iOverXP = p_data[id][P_XP] - iTotalXP;
+    }
+
+    if (iOverXP <= 0) return;
+
+
+    p_data[id][P_XP] -= iOverXP;
+
+    XP_Check(id);
+
+    new iMoneyAdd = floatround(iOverXP * XP_TO_MONEY_RATE);
+    if (iMoneyAdd <= 0) return;
+
+    new iMoney = cs_get_user_money(id);
+    iMoney += iMoneyAdd;
+	
+	if (iMoney > 16000) iMoney = 16000;
+	
+	cs_set_user_money(id, iMoney, 1);
+
+	client_print(id, print_chat, "%s Money Bonus : Surplus %d XP converted to %d $", g_MODclient, iOverXP, iMoneyAdd);
+	
 }

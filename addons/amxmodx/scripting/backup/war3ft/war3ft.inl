@@ -13,6 +13,12 @@
 public WC3_Precache()
 {
 	
+	gSpriteShockwave = precache_model( "sprites/shockwave.spr" );
+	gExplodeModel = precache_model( gFbExplodeModel );
+
+	precache_sound( gFbExplodeSound );
+	
+	
 	// Precache wc3.css (if it exists!)
 	if ( !file_exists( "wc3.css" ) )
 	{
@@ -122,7 +128,23 @@ public WC3_Precache()
 	copy( g_szRaceSprites[RACE_SHADOW]		, 63, "sprites/warcraft3/races/wc3_shadow_01.spr"	);
 	copy( g_szRaceSprites[RACE_WARDEN]		, 63, "sprites/warcraft3/races/wc3_warden_01.spr"	);
 	copy( g_szRaceSprites[RACE_CRYPT]		, 63, "sprites/warcraft3/races/wc3_cryptlord_01.spr"	);
+	copy( g_szRaceSprites[RACE_STALKER]		, 63, "sprites/warcraft3/races/wc3_nightstalker_01.spr"	);
 	copy( g_szRaceSprites[RACE_CHAMELEON]	, 63, "sprites/warcraft3/races/wc3_chameleon_01.spr"	);
+	
+	
+		// Store race knife names
+	copy( g_szRaceVKnife[RACE_NONE]			, 63, "models/warcraft3/races/v_0_none.mdl"				);		// OK - Katana Sword  
+	copy( g_szRaceVKnife[RACE_UNDEAD]		, 63, "models/warcraft3/races/v_1_undead_2.mdl"			);		// OK - Claws Knife   
+	copy( g_szRaceVKnife[RACE_HUMAN]		, 63, "models/warcraft3/races/v_2_human.mdl"			);		// OK - Halo Knife 	
+	copy( g_szRaceVKnife[RACE_ORC]			, 63, "models/warcraft3/races/v_3_orc.mdl"				);		// OK - Red Axe  
+	copy( g_szRaceVKnife[RACE_ELF]			, 63, "models/warcraft3/races/v_4_elf_2.mdl"			);		// OK - Elf Knife 
+	copy( g_szRaceVKnife[RACE_BLOOD]		, 63, "models/warcraft3/races/v_5_bloodmage.mdl"		);		// OK - Golden Axe 
+	copy( g_szRaceVKnife[RACE_SHADOW]		, 63, "models/warcraft3/races/v_6_shaman_2.mdl"			);		// OK - Dark Axe  
+	copy( g_szRaceVKnife[RACE_WARDEN]		, 63, "models/warcraft3/races/v_7_warden.mdl"			);		// OK - Shard Knife  
+	copy( g_szRaceVKnife[RACE_CRYPT]		, 63, "models/warcraft3/races/v_8_cryptlord_2.mdl"		);		// OK - Poison Knife 
+	copy( g_szRaceVKnife[RACE_STALKER]		, 63, "models/warcraft3/races/v_9_reaper.mdl"			);		// OK - Skeleton Axe 
+	copy( g_szRaceVKnife[RACE_CHAMELEON]	, 63, "models/warcraft3/races/v_0_chameleon.mdl"		);		// OK - Katana Sword 
+	
 
 	// Store level sprite names
 	for ( i = 0; i < 11; i++ )
@@ -190,6 +212,17 @@ public WC3_Precache()
 			bError = true;
 		}
 	}
+	
+		// Check the race v knife models 
+	for ( i = 0; i <= MAX_RACES; i++ )
+	{
+		if ( !file_exists( g_szRaceVKnife[i] ) )
+		{
+			WC3_Log( true, "[ERROR] Missing model file '%s'", g_szRaceVKnife[i] );
+
+			bError = true;
+		}
+	}
 
 
 	// Check the level sprites
@@ -230,6 +263,13 @@ public WC3_Precache()
 				for ( i = 0; i <= MAX_RACES; i++ )
 				{
 					g_iRaceSprites[i] = precache_model( g_szRaceSprites[i] );
+				}
+				
+				// Precache race v knife 
+				for ( i = 0; i <= MAX_RACES; i++ )
+				{
+					// g_iRaceVKnife[i] = precache_model( g_szRaceVKnife[i] );
+					precache_model( g_szRaceVKnife[i] );
 				}
 
 				// Precache level sprites
@@ -1317,8 +1357,11 @@ public WC3_Death( iVictim, iKiller, iWeaponID, iHeadshot )
 		// Lets give a little extra money if CSDM is on...
 		if ( CVAR_csdm_active > 0 && get_pcvar_num( CVAR_csdm_active ) == 1 )
 		{
-			SHARED_SetUserMoney( iKiller, SHARED_GetUserMoney( iKiller ) + 300, 1 );
+			SHARED_SetUserMoney( iKiller, SHARED_GetUserMoney( iKiller ) + 500, 1 );
 		}
+		
+		NS_SkillsBounty( iKiller, iVictim );
+		
 	}
 
 	// Give the bot a chance to respawn
@@ -1708,6 +1751,10 @@ WC3_PostSpawn( id )
 
 		// If the user's ultimate is ready, lets show their icon!
 		ULT_IconHandler( id );
+		
+		// NS Skill Hunter 
+		set_task(1.4, "NS_SkillHunter", id);
+		
 	}
 
 	// Check for Day of Defeat

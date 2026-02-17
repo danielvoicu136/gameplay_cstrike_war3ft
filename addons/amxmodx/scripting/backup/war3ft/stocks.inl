@@ -55,3 +55,50 @@ stock bool:IsCurrentSpeedHigherThan(id, Float:fValue)
      
     return false;
 }
+
+// Convert option 10 into 0 for change race menu 
+stock getKeyString(num, output[], size)
+{
+    if (num == 10)
+    {
+        formatex(output, size, "0"); 
+    }
+    else
+    {
+        formatex(output, size, "%d", num); 
+    }
+}
+
+// Create Fog 
+
+/*
+
+public EventRoundStart( ) 
+{ 
+    set_lights("off")
+    CreateFog( 0, .clear = false )
+}  
+public t_win()
+{
+    CreateFog( 0, 0, 0, 0, 0.003 );
+    set_lights("b") 
+	
+*/
+
+stock CreateFog ( const index = 0, const red = 127, const green = 127, const blue = 127, const Float:density_f = 0.001, bool:clear = false )
+{
+    static msgFog;
+    
+    if ( msgFog || ( msgFog = get_user_msgid( "Fog" ) ) )
+    {
+        new density = _:floatclamp( density_f, 0.0001, 0.25 ) * _:!clear;
+        
+        message_begin( index ? MSG_ONE_UNRELIABLE : MSG_BROADCAST, msgFog, .player = index );
+        write_byte( clamp( red  , 0, 255 ) );
+        write_byte( clamp( green, 0, 255 ) );
+        write_byte( clamp( blue , 0, 255 ) );
+        write_long( _:density );
+        message_end();
+    }
+} 
+

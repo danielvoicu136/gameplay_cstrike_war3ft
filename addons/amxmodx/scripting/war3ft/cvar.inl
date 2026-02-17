@@ -10,7 +10,6 @@ new CVAR_sv_gravity;
 new CVAR_csdm_active;
 
 // Miscellaneous Configuration CVARs
-new CVAR_wc3_query_client;
 new CVAR_wc3_show_player;
 new CVAR_wc3_buy_dead;
 new CVAR_wc3_buy_time;
@@ -126,7 +125,7 @@ public CVAR_Init()
 
 	// Miscellaneous Configuration CVARs
 
-	CVAR_wc3_query_client			= register_cvar( "wc3_query_client"			, "1"							);
+
 	CVAR_wc3_show_player			= register_cvar( "wc3_show_player"			, "1"							);
 	CVAR_wc3_buy_dead				= register_cvar( "wc3_buy_dead"				, "1"							);
 	CVAR_wc3_buy_time				= register_cvar( "wc3_buy_time"				, "0"							);

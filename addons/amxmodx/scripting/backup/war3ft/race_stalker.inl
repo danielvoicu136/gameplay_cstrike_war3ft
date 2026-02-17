@@ -129,7 +129,7 @@ public positionChangeCheck(id)
 
 	if ( g_lastPosition[id][0] == origin[0] && g_lastPosition[id][1] == origin[1] && g_lastPosition[id][2] == origin[2] && is_user_alive(id) ) {
 		user_kill(id)
-		client_print(id, print_chat, "* You died from being stuck")
+		client_print(id, print_chat, "* You died from being stuck when leaving Dark Ascension")
 	}
 	
 	static iSkillLevel;

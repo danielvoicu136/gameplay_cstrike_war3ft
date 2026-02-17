@@ -24,6 +24,7 @@
 #define	TASK_ITEM_GLOVES	544		// Nade timer (gloves)
 #define	TASK_UNHOLYSPEED	576		// Unholyspeed timer
 #define	TASK_RESETGOD		608		// Reset god mode
+#define	TASK_RESETCLIP		632		// Reset clip mode
 #define	TASK_BLINKCHECK		640		// Check to see if the player teleported into an invalid location
 #define	TASK_BLINKSTUCK		672		// Checks to see if a user is stuck after blinking
 #define	TASK_BIGBADATTACKER	704		// _SH_ResetBigBadAttacker
@@ -193,7 +194,8 @@
 #define RACE_SHADOW				6
 #define RACE_WARDEN				7
 #define RACE_CRYPT				8
-#define RACE_CHAMELEON			9
+#define RACE_STALKER			9
+#define RACE_CHAMELEON			10
 
 // team ids 
 #define UNASSIGNED 0 
@@ -235,7 +237,7 @@
 //#define DISPLAYLEVEL_SHOWBOTH		3
 #define	DISPLAYLEVEL_SHOWRACECHAT	4
 
-#define MAX_RACES					9
+#define MAX_RACES					10
 
 #define MAX_LEVELS					10
 
@@ -542,7 +544,16 @@ new bool:g_bGlovesDisabled = false;
 #define ULTIMATE_LOCUSTSWARM	34
 #define PASS_ORB				35
 
-#define MAX_SKILLS				36
+#define SKILL_VOID				36
+#define SKILL_FEAR				37 
+#define SKILL_HUNTER			38 
+#define ULTIMATE_ASCENSION		39
+#define PASS_HEARTH				40
+
+// SKILLS + 1 
+#define MAX_SKILLS				41
+
+
 #define MAX_RACE_SKILLS         3
 #define MAX_SKILL_LEVEL			3
 #define MAX_ULTIMATE_LEVEL		1
@@ -571,7 +582,7 @@ new bool:g_bPlayerSkills[33][MAX_SKILLS];		// Stores what skills the player has 
 new const Float:p_vampiric[3] =			{0.10,0.20,0.30}		// Vampiric Aura			(skill 1)
 new Float:p_unholy[3] =					{265.0,285.0,300.0}		// Unholy Aura				(skill 2)
 new Float:p_unholy_dod[3] =				{33.3,66.6,100.0}		// Unholy Aura				(skill 2)
-new const Float:p_levitation[3] =		{0.8,0.6,0.4}			// Levitation				(skill 3)
+new const Float:p_levitation[3] =		{0.7,0.5,0.3}			// Levitation				(skill 3)
 
 new const p_invisibility[3] =			{200,170,130}			// Invisibility				(skill 1)
 new const p_devotion =					15						// Devotion Aura			(skill 2)
@@ -607,8 +618,45 @@ new const Float:p_spiked[3] =			{0.05,0.1,0.15}			// Spiked Carapace			(skill 2)
 new const Float:p_carrion[3] =			{0.05,0.10,0.15}		// Carrion Beetle			(skill 3)
 new const Float:p_orb[11] =				{0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10, 0.15}	// Orb of Annihilation	(Skill 4)
 
+new const Float:p_void[3] =				{0.333,0.666,1.0}						// Void 					(skill 1)
+//new const Float:p_fear[3] =			{0.10,0.20,0.30}						// Fear 					(skill 2)
+new const Float:p_fear[3]  =			{0.05,0.10,0.15}						// Fear 					(skill 2)
+new const Float:p_hunter_power[3] =		{50.0,70.0,90.0}						// Hunter Power 			(skill 3)
+new const Float:p_hunter_radius[3] =	{200.0,300.0,400.0}						// Hunter Radius 			(skill 3)
+new const p_hearth[11] =				{10,12,14,16,18,20,22,24,26,28,30}		// Hearth					(skill 4)
 
-new MOTD_header[] = "<html><head><LINK REL=^"StyleSheet^" HREF=^"wc3.css^" TYPE=^"text/css^"></head><body>";
+
+new const InstantExplode = 0; 
+
+new gSpriteShockwave;
+new gMaxPlayers;
+new gExplodeModel;
+
+new const gFbExplodeSound[ ] = "x_shoot1.wav";
+new const gFbExplodeModel[ ] = "models/w_flashbang.mdl";
+
+
+#define IsPlayer(%1)		(1 <= %1 <= gMaxPlayers)
+#define write_coord_f(%0)	(engfunc( EngFunc_WriteCoord, %0 ))
+#define BREAK_TRANS		0x20
+
+const m_bLightSmoke = 114;
+const m_bIsC4 = 96;
+const m_XoGrenade = 5;
+
+
+
+//new MOTD_header[] = "<html><head><LINK REL=^"StyleSheet^" HREF=^"wc3.css^" TYPE=^"text/css^"></head><body>";
+new MOTD_header[] = "<html><head><link rel=^"stylesheet^" href=^"http://daeva.ro/donate_hero/war3ft.css^" TYPE=^"text/css^"></head><body>";
+
+/*
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<html>");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<head>");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<meta charset=^"utf-8^">");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<link rel=^"stylesheet^" href=^"http://perfect-soft.su/css/cssb.css^" type=^"text/css^">");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "</head>");
+	iPos += formatex(szTmpMsg[iPos], charsmax(szTmpMsg)-iPos, "<body>");
+*/
 
 // SOUNDS
 #define MAX_SOUNDS	29
@@ -720,3 +768,47 @@ new bool:g_bCZBotRegisterHam
 
 // Game Menu 
 new bool:ChooseTeamOverrideActive[33];
+
+// Used by Dark Ascension 
+new g_lastPosition[33][3]; 
+
+
+// V Models 
+new g_szRaceVKnife[MAX_RACES + 1][64];
+new g_iRaceVKnife[MAX_RACES + 1];
+new bool:g_UseRaceKnife[33];
+
+// XP Bonus per Spawn 
+
+// Define the maximum number of rounds you want to handle bonuses for
+#define MAX_BONUS_ROUNDS 20
+
+new const g_roundBonuses[MAX_BONUS_ROUNDS][2] = {
+    {5, 100},
+    {10, 200},
+    {15, 300},
+    {20, 400},
+    {25, 500},
+    {30, 600},
+    {35, 700},
+    {40, 800},
+    {45, 900},
+    {50, 1000},
+    {55, 1100},
+    {60, 1200}, 
+    {65, 1300},
+    {70, 1400},
+    {75, 1500},
+    {80, 1600},
+    {85, 1700},
+    {90, 1800},
+    {95, 1900},
+    {100, 2000} 
+};
+
+new g_playerSpawns[33];
+
+// Config Clean Binds 
+#define SPRAY				201 			
+#define FLASHLIGHT 			100 
+
