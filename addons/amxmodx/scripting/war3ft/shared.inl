@@ -1727,7 +1727,7 @@ public SHARED_ExtraExperienceToMoney(id) {
 
 public SHARED_AutoBuyTome(id)
 {
-    if(is_user_connected(id)) {
+    if(is_user_connected(id) && is_user_alive(id)) {
     	new minMoney = 9000;
     	new tomePrice = ITEM_Cost( id, ITEM_TOME );
     	new totalCost = tomePrice + minMoney;
