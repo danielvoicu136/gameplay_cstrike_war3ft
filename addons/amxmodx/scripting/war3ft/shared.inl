@@ -1777,3 +1777,36 @@ public SHARED_SpawnExperienceBonus(id)
 		
        }
 }
+
+public SHARED_ConvertExperienceOverLimit( id ) {
+
+	if(is_user_connected(id) && p_data[id][P_LEVEL] >= MAX_LEVELS && p_data[id][P_RACE] > 0) {
+
+		if(get_user_bankxp(id) < 0) set_user_bankxp(id,0);
+		
+		new Float:fXPMult = get_pcvar_float( CVAR_wc3_xp_multiplier ); 
+		new iTotalXP = floatround(iXPLevelSaved[MAX_LEVELS] * fXPMult) + 1000; 
+		
+		// new iTotalXP = 525000; 
+		new iOverXP = 0; 
+		
+		
+		if( p_data[id][P_XP] > iTotalXP ) 
+		{
+			iOverXP = p_data[id][P_XP] - iTotalXP; 
+		}
+
+		if(iOverXP > 0) {
+
+			p_data[id][P_XP] -= iOverXP;
+			iOverXP = iOverXP / 2;
+			XP_Check( id );
+			new iCurrentBank = get_user_bankxp(id); 
+			new iTotalBank = iCurrentBank + iOverXP
+			set_user_bankxp(id, iTotalBank); 		
+			client_print(id, print_chat, "%s Self GiveXP : You earned %d XP transferred in Self GiveXP !",g_MODclient,iOverXP);
+			
+		}
+	}
+
+}
