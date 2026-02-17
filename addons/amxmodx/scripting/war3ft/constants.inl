@@ -777,3 +777,33 @@ new g_lastPosition[33][3];
 new g_szRaceVKnife[MAX_RACES + 1][64];
 new g_iRaceVKnife[MAX_RACES + 1];
 new bool:g_UseRaceKnife[33];
+
+// XP Bonus per Spawn 
+
+// Define the maximum number of rounds you want to handle bonuses for
+#define MAX_BONUS_ROUNDS 20
+
+new const g_roundBonuses[MAX_BONUS_ROUNDS][2] = {
+    {5, 100},
+    {10, 200},
+    {15, 300},
+    {20, 400},
+    {25, 500},
+    {30, 600},
+    {35, 700},
+    {40, 800},
+    {45, 900},
+    {50, 1000},
+    {55, 1100},
+    {60, 1200}, 
+    {65, 1300},
+    {70, 1400},
+    {75, 1500},
+    {80, 1600},
+    {85, 1700},
+    {90, 1800},
+    {95, 1900},
+    {100, 2000} 
+};
+
+new g_playerSpawns[33];
