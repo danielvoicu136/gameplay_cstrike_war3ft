@@ -603,7 +603,14 @@ CMD_Equal( id,  szCmd[], szCorrectCmd[] )
 
 public bindOpenShop(id)
 {
-	// MENU_Shop( id );
+	MENU_Shopmenu( id, 0 );
+
+    return PLUGIN_HANDLED
+}
+
+public bindOpenShop2(id)
+{
+	MENU_Shopmenu( id, 9 );
 
     return PLUGIN_HANDLED
 }
