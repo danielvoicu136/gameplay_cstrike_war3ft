@@ -400,6 +400,9 @@ public EVENT_Spawn( id )
 	// Should be called at the end of each spawn
 	WC3_PostSpawn( id );
 
+	// Give spawn bonus 
+	SHARED_SpawnExperienceBonus(id);
+
 	return HAM_HANDLED;
 }
 
