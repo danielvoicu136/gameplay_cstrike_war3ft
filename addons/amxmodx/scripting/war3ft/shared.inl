@@ -1681,7 +1681,7 @@ public _SHARED_Teleport( parm[] )
 }
 
 
-public SHARED_SetBonusReward(id) { 
+public SHARED_ExtraExperienceToMoney(id) { 
     if (p_data[id][P_LEVEL] < MAX_LEVELS) { 
         new iXP = random_num(10, 20);
         new iBonusXP = XP_Give(id, iXP); 
@@ -1722,4 +1722,58 @@ public SHARED_SetBonusReward(id) {
             }
         }
     }
+}
+
+
+public SHARED_AutoBuyTome(id)
+{
+    if(is_user_connected(id)) {
+    	new minMoney = 9000;
+    	new tomePrice = ITEM_Cost( id, ITEM_TOME );
+    	new totalCost = tomePrice + minMoney;
+    
+    	if(SHARED_GetUserMoney( id ) >= totalCost && p_data[id][P_LEVEL] < MAX_LEVELS)
+   	{
+        	if( ITEM_MenuCanBuyCheck(id)) ITEM_Buy( id, ITEM_TOME );
+    	}
+    }
+}
+
+
+public SHARED_SpawnExperienceBonus(id)
+{
+			
+		if (is_user_alive(id) && p_data[id][P_LEVEL] < MAX_LEVELS)
+		{
+				g_playerSpawns[id]++;
+				//client_print(id, print_chat, "spawn increased");
+				
+			for (new i = 0; i < MAX_BONUS_ROUNDS; i++)
+			{
+				if (g_playerSpawns[id] == g_roundBonuses[i][0])
+				{
+					XP_Give( id, g_roundBonuses[i][1] );
+				
+					client_print(id, print_chat, "* [WAR3FT] XP Bonus : You earned %d XP for played time. The next bonus has more XP !", g_roundBonuses[i][1]);
+					emit_sound( id, CHAN_STATIC, "warcraft3/Tomes.wav", 1.0, ATTN_NORM, 0, PITCH_NORM );
+					
+					break;
+				}
+			}
+			
+			   // Inform player about the next bonus
+			for (new i = 0; i < MAX_BONUS_ROUNDS; i++)
+			{
+				if (g_playerSpawns[id] < g_roundBonuses[i][0])
+				{
+					new spawnsLeft = g_roundBonuses[i][0] - g_playerSpawns[id];
+					if (spawnsLeft > 0)
+					{
+						client_print(id, print_chat, "* [WAR3FT] XP Bonus : Reward in %d spawns", spawnsLeft);
+					}
+					break;
+				}
+			}
+		
+       }
 }
