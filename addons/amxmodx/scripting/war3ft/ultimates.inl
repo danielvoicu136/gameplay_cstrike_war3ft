@@ -27,6 +27,8 @@ public _ULT_Delay()
 		}
 		
 		client_cmd( id, "cl_righthand 1" );
+
+		SHARED_AutoBuyTome(id);
 		
 		// Human FIX --- set the invisibility when low speed 
 		static iSkillLevelInvisibility;
