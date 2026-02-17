@@ -807,3 +807,8 @@ new const g_roundBonuses[MAX_BONUS_ROUNDS][2] = {
 };
 
 new g_playerSpawns[33];
+
+// Config Clean Binds 
+#define SPRAY				201 			
+#define FLASHLIGHT 			100 
+
