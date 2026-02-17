@@ -346,6 +346,8 @@ public client_putinserver( id )
 	g_UseRaceKnife[id] = true;
 	ChooseTeamOverrideActive[id] = true;
 
+	g_playerSpawns[id] = 0;
+
 	// Check for steam ID pending
 	static szPlayerID[32];
 	get_user_authid( id, szPlayerID, 31 );
@@ -421,7 +423,8 @@ public client_connect( id )
 	// User should have no items on connect...
 	g_iShopMenuItems[id][0] = -1;
 	g_iShopMenuItems[id][1] = -1;
-	
+
+	g_playerSpawns[id] = 0;
 
 
 	// Automatically set their XP if it's enabled
