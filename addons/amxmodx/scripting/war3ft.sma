@@ -166,12 +166,12 @@ public plugin_init()
 	register_clcmd( "jointeam"			, "cmd_Jointeam"	, -1 );
 
 	// Stock Binds 
-	
-	// register_clcmd( "radio1","bindOpenShop");
-	// register_clcmd( "radio2","bindSetWard");
-	// register_clcmd( "radio3","bindSetWard");
-	register_forward(FM_CmdStart, "FWD_CmdStart");   // Bind Ultimate on F (Flash) 
-	
+	register_clcmd( "radio1","bindOpenShop");
+	register_clcmd( "radio2","bindOpenShop2");
+	register_clcmd( "radio3","bindSetWard");
+	register_forward(FM_CmdStart, "FWD_CmdStart");   
+
+	// Team Over Binds 
 	register_clcmd("chooseteam", "ChooseTeam");
 
 	// Admin Commands
