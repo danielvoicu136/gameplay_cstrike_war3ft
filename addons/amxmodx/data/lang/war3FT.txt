@@ -1,15 +1,15 @@
 [en]
 RACE_0 = No Race
-RACE_1 = Undead (Explosion) 
-RACE_2 = Human (Teleport)
-RACE_3 = Orc (Lightning)
-RACE_4 = Night Elf (Prison) 
-RACE_5 = Blood Mage (Burning)
-RACE_6 = Shaman (Invincibility) 
-RACE_7 = Warden (Respawn) 
-RACE_8 = Crypt Lord (Cloud Damage)    
-RACE_9 = Death Reaper (Ghost Form) 
-RACE_10 = Polymorph (Random) 
+RACE_1 = Undead ( Explosion )
+RACE_2 = Human ( Teleport )
+RACE_3 = Orc ( Lightning )
+RACE_4 = Night Elf ( Prison )
+RACE_5 = Blood Mage ( Burning )
+RACE_6 = Shaman ( Invincibility )
+RACE_7 = Warden ( Respawn )
+RACE_8 = Crypt Lord ( Cloud Damage )
+RACE_9 = Death Reaper ( Ghost Form )
+RACE_10 = Polymorph ( Random ) 
 
 RACE_S_0 = No Race
 RACE_S_1 = Undead
@@ -36,7 +36,7 @@ SKILL_9 = Critical Grenade
 SKILL_10 = Save Equipment 
 SKILL_11 = Lightning
 SKILL_12 = Bullet Evasion
-SKILL_13 = Mirror Damage to Attacker
+SKILL_13 = Mirror Damage
 SKILL_14 = Increase Damage 
 SKILL_15 = Prison 
 SKILL_16 = Revive Friends
@@ -46,11 +46,11 @@ SKILL_19 = Burning
 SKILL_20 = Reducing Bullet Damage  
 SKILL_21 = Healing Aura  
 SKILL_22 = Slowing Strike 
-SKILL_23 = Observer Ward press Z 
+SKILL_23 = Observer Ward - Press C 
 SKILL_24 = Invincibility 
 SKILL_25 = Surrounding Damage
 SKILL_26 = Spawn in Enemy Base  
-SKILL_27 = Ultimate Blocker
+SKILL_27 = Block Ultimate
 SKILL_28 = Poison Strike
 SKILL_29 = Respawn 
 SKILL_30 = Reducing Magic Damage  
@@ -88,7 +88,7 @@ SKILL_I_19 = Discharges fire to burn the enemy over time
 SKILL_I_20 = You will deflect a percentage of normal damage done to you
 SKILL_I_21 = You heal yourself and nearby teammates
 SKILL_I_22 = You have a chance of disabling your enemy's abilities, as well as slowing him/her down
-SKILL_I_23 = You receive serpent wards each round that damage nearby enemy units (bind a key to ability (or say ability) to plant one)
+SKILL_I_23 = You receive serpent wards each round that damage nearby enemy - Press C or type /ability 
 SKILL_I_24 = Invincibility for 2 seconds
 SKILL_I_25 = When attacked, you have a chance of doing damage to your attacker and his nearby teammates
 SKILL_I_26 = You have a chance of becoming a mole, spawn in enemy base
@@ -280,25 +280,17 @@ MENU_REPLACE_ITEM = \yWhich item would you like to replace?
 WAR3HELP_TITLE = Warcraft 3 Frozen Throne Help
 
 WAR3HELP :
-This is how you bind a key<p>
-1) Type ` to get to the console (key to the left of number 1)<br>
-2) Type bind f ultimate<br>
-3) Type bind - shopmenu<br>
-4) Type bind = shopmenu2<br>
-5) Type bind v ability<p>
-There are a few commands you need to know <p>
-say /ability - if you have serpent wards it will plant them<br>
-say /changerace - allows you to change your race<br>
-say /itemsinfo - shows you a list of items and what they do for shop 1<br>
-say /itemsinfo2 - shows you a list of items and what they do for shop 2<br>
+This is what you need to know<p>
+say /race - select a new race with different powers<br>
+say /raceinfo - show your current race powers<br>
+say /shop or press Z - buy magic items with powers from Shop 1<br>
+say /shop2 or press X - buy magic items with powers from Shop 2<br>
+Press F to use your race ultimate - type bind f ultimate in console if it does not work<p>
+
 say /level - shows you what race, level and skills you have<br>
-say /levitation - disable / enable levitation if you are undead<br>
-say /movespeed - shows your current movespeed<br>
 say /playerskills - shows you what skills other players have chosen<br>
 say /resetskills - resets your skills , you can choose again<br>		
-say /resetxp - will reset your level and XP to 0 ( CAREFULL , ZERO 0 XP ) 
 say /selectskill - allows you to select skills before the start of the next round<br>
-say /skillsinfo - shows you what each skill does for the race you have selected<br>
 say /war3menu -  shows the War3 Frozen Throne Player menu<br>
 
 :
